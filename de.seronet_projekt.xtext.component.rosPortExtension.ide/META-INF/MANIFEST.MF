@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.seronet_projekt.xtext.component.rosPortExtension.ide
+Bundle-Vendor: SeRoNet (www.seronet-projekt.de)
+Bundle-Version: 3.7.0.qualifier
+Bundle-SymbolicName: de.seronet_projekt.xtext.component.rosPortExtension.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: de.seronet_projekt.xtext.component.rosPortExtension,
+ de.seronet_projekt.ecore.component.rosPortExtension,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: de.seronet_projekt.xtext.component.rosPortExtension.ide.contentassist.antlr.internal,
+ de.seronet_projekt.xtext.component.rosPortExtension.ide.contentassist.antlr
+Automatic-Module-Name: de.seronet_projekt.xtext.component.rosPortExtension.ide
+

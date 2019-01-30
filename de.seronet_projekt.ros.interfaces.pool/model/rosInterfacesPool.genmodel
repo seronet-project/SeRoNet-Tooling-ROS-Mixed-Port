@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.seronet_projekt.ros.interfaces.pool/src" modelPluginID="de.seronet_projekt.ros.interfaces.pool"
+    modelName="RosInterfacesPool" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>rosInterfacesPool.ecore</foreignModel>
+  <genPackages prefix="RosInterfacesPool" disposableProviderFactory="true" ecorePackage="rosInterfacesPool.ecore#/">
+    <genClasses ecoreClass="rosInterfacesPool.ecore#//RosInterfacesPool">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference rosInterfacesPool.ecore#//RosInterfacesPool/interfaces"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="rosInterfacesPool.ecore#//RosTopic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rosInterfacesPool.ecore#//RosTopic/topicName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rosInterfacesPool.ecore#//RosTopic/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="rosInterfacesPool.ecore#//RosService">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rosInterfacesPool.ecore#//RosService/srvName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rosInterfacesPool.ecore#//RosService/type"/>
+    </genClasses>
+    <genClasses ecoreClass="rosInterfacesPool.ecore#//RosPublisher"/>
+    <genClasses ecoreClass="rosInterfacesPool.ecore#//RosSubscriber"/>
+    <genClasses ecoreClass="rosInterfacesPool.ecore#//RosSrvServer"/>
+    <genClasses ecoreClass="rosInterfacesPool.ecore#//RosSrvClient"/>
+    <genClasses image="false" ecoreClass="rosInterfacesPool.ecore#//RosInterface">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rosInterfacesPool.ecore#//RosInterface/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ComponentDefinition="http://www.ecore.org/component/ComponentDefinition" xmlns:PerformanceExtension="http://www.ecore.org/component/PerformanceExtension" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis xmi:id="_Xk8pkO1rEeinaYXKlN_2KA" selectedViews="_XqtTUO1rEeinaYXKlN_2KA" version="12.1.0.201708031200">
+    <semanticResources>model/ComponentRosJoystick.component</semanticResources>
+    <semanticResources>model/ComponentRosJoystick.componentDocumentation</semanticResources>
+    <semanticResources>model/ComponentRosJoystick.componentParameters</semanticResources>
+    <semanticResources>platform:/resource/CommBasicObjects/model/CommBasicObjects.services</semanticResources>
+    <semanticResources>platform:/resource/CommBasicObjects/model/CommBasicObjects.types</semanticResources>
+    <semanticResources>platform:/plugin/org.xtext.base.stateMachine/componentLifecycle/ComponentLifecycle.automaton</semanticResources>
+    <semanticResources>platform:/resource/CommBasicObjects/model/CommBasicObjects.modes</semanticResources>
+    <semanticResources>platform:/plugin/org.xtext.service.parameterDefinition/defaultParameterLib/defaultParameterLib.parameters</semanticResources>
+    <semanticResources>platform:/resource/CommBasicObjects/model/CommBasicObjects.parameters</semanticResources>
+    <semanticResources>model/ComponentRosJoystick.componentRosPorts</semanticResources>
+    <semanticResources>model/ros_system.rosInterfaces</semanticResources>
+    <semanticResources>model/joy.rosinterfacespool</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" xmi:id="_XqtTUO1rEeinaYXKlN_2KA">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_XrQF4O1rEeinaYXKlN_2KA" name="ComponentRosJoystick" repPath="#_Xq12MO1rEeinaYXKlN_2KA">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+        <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/ComponentRosJoystick.component#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram xmi:id="_XrLNYO1rEeinaYXKlN_2KA" name="ComponentRosJoystick" uid="_Xq12MO1rEeinaYXKlN_2KA">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_XrLNYe1rEeinaYXKlN_2KA" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_XrLNYu1rEeinaYXKlN_2KA"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_XrZP0O1rEeinaYXKlN_2KA" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_XrZP0e1rEeinaYXKlN_2KA" type="Sirius" element="_XrLNYO1rEeinaYXKlN_2KA" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_XrfWcO1rEeinaYXKlN_2KA" type="2002" element="_XrLNZO1rEeinaYXKlN_2KA">
+          <children xmi:type="notation:Node" xmi:id="_XrmrMO1rEeinaYXKlN_2KA" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_XrnSQO1rEeinaYXKlN_2KA" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_czOsUO1rEeinaYXKlN_2KA" type="3008" element="_cy-0sO1rEeinaYXKlN_2KA">
+              <children xmi:type="notation:Node" xmi:id="_czPTYO1rEeinaYXKlN_2KA" type="5005"/>
+              <children xmi:type="notation:Node" xmi:id="_czQhgO1rEeinaYXKlN_2KA" type="7002">
+                <children xmi:type="notation:Node" xmi:id="_hfGlkO1rEeinaYXKlN_2KA" type="3008" element="_hexOYO1rEeinaYXKlN_2KA">
+                  <children xmi:type="notation:Node" xmi:id="_hfHMoO1rEeinaYXKlN_2KA" type="5005"/>
+                  <children xmi:type="notation:Node" xmi:id="_hfHMoe1rEeinaYXKlN_2KA" type="7002">
+                    <styles xmi:type="notation:SortingStyle" xmi:id="_hfHMou1rEeinaYXKlN_2KA"/>
+                    <styles xmi:type="notation:FilteringStyle" xmi:id="_hfHMo-1rEeinaYXKlN_2KA"/>
+                  </children>
+                  <styles xmi:type="notation:ShapeStyle" xmi:id="_hfGlke1rEeinaYXKlN_2KA" fontName="Ubuntu" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hfGlku1rEeinaYXKlN_2KA" x="19" y="30" width="111" height="39"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_czQhge1rEeinaYXKlN_2KA"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_czQhgu1rEeinaYXKlN_2KA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_czOsUe1rEeinaYXKlN_2KA" fontName="Ubuntu" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_czOsUu1rEeinaYXKlN_2KA" x="43" y="42" height="99"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_XrnSQe1rEeinaYXKlN_2KA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_XrnSQu1rEeinaYXKlN_2KA"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_fUcr4O1rEeinaYXKlN_2KA" type="3012" element="_fUST0O1rEeinaYXKlN_2KA">
+            <children xmi:type="notation:Node" xmi:id="_fUd6AO1rEeinaYXKlN_2KA" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_fUd6Ae1rEeinaYXKlN_2KA" x="31" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_fUg9UO1rEeinaYXKlN_2KA" type="3014" element="_fUS64O1rEeinaYXKlN_2KA">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_fUg9Ue1rEeinaYXKlN_2KA" fontName="Ubuntu"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fUg9Uu1rEeinaYXKlN_2KA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_fUcr4e1rEeinaYXKlN_2KA" fontName="Ubuntu" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fUcr4u1rEeinaYXKlN_2KA" x="245" y="84" width="30" height="30"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_XrfWce1rEeinaYXKlN_2KA" fontName="Ubuntu" fontHeight="10" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XrfWcu1rEeinaYXKlN_2KA" x="240" y="180" width="255" height="183"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_XrZP0u1rEeinaYXKlN_2KA"/>
+        <edges xmi:type="notation:Edge" xmi:id="_fUiLcO1rEeinaYXKlN_2KA" type="4001" element="_fUXMUO1rEeinaYXKlN_2KA" source="_czOsUO1rEeinaYXKlN_2KA" target="_fUcr4O1rEeinaYXKlN_2KA">
+          <children xmi:type="notation:Node" xmi:id="_fUjZkO1rEeinaYXKlN_2KA" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fUjZke1rEeinaYXKlN_2KA" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_fUkAoO1rEeinaYXKlN_2KA" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fUkAoe1rEeinaYXKlN_2KA" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_fUlOwO1rEeinaYXKlN_2KA" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fUlOwe1rEeinaYXKlN_2KA" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_fUiLce1rEeinaYXKlN_2KA"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_fUiLcu1rEeinaYXKlN_2KA" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fUiLc-1rEeinaYXKlN_2KA" points="[4, 1, -214, -45]$[203, 42, -15, -4]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_fUoSEO1rEeinaYXKlN_2KA" id="(0.5,0.4742268041237113)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_fUoSEe1rEeinaYXKlN_2KA" id="(0.5,0.5)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_XrLNZO1rEeinaYXKlN_2KA" name="ComponentRosJoystick" tooltipText="ComponentDefinition">
+      <target xmi:type="ComponentDefinition:ComponentDefinition" href="model/ComponentRosJoystick.component#//@component"/>
+      <semanticElements xmi:type="ComponentDefinition:ComponentDefinition" href="model/ComponentRosJoystick.component#//@component"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" xmi:id="_fUST0O1rEeinaYXKlN_2KA" name="JoystickServiceOut" tooltipText="OutputPort" incomingEdges="_fUXMUO1rEeinaYXKlN_2KA" width="3" height="3" resizeKind="NSEW">
+        <target xmi:type="ComponentDefinition:OutputPort" href="model/ComponentRosJoystick.component#//@component/@elements.1"/>
+        <semanticElements xmi:type="ComponentDefinition:OutputPort" href="model/ComponentRosJoystick.component#//@component/@elements.1"/>
+        <ownedStyle xmi:type="diagram:CustomStyle" xmi:id="_fUS64O1rEeinaYXKlN_2KA" showIcon="false" id="output">
+          <description xmi:type="style:CustomStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@borderedNodeMappings[name='OutputPortNode']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@borderedNodeMappings[name='OutputPortNode']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_XrLNZe1rEeinaYXKlN_2KA" labelSize="10" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,245,181">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_cy-0sO1rEeinaYXKlN_2KA" name="JoystickActivity" tooltipText="Activity" outgoingEdges="_fUXMUO1rEeinaYXKlN_2KA">
+        <target xmi:type="ComponentDefinition:Activity" href="model/ComponentRosJoystick.component#//@component/@elements.0"/>
+        <semanticElements xmi:type="ComponentDefinition:Activity" href="model/ComponentRosJoystick.component#//@component/@elements.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_cy_bwO1rEeinaYXKlN_2KA" borderSize="1" borderSizeComputationExpression="1">
+          <labelFormat>bold</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']"/>
+        <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_hexOYO1rEeinaYXKlN_2KA" name="PeriodicTimer" tooltipText="DefaultTrigger">
+          <target xmi:type="PerformanceExtension:DefaultPeriodicTimer" href="model/ComponentRosJoystick.component#//@component/@elements.0/@extensions.0"/>
+          <semanticElements xmi:type="PerformanceExtension:DefaultPeriodicTimer" href="model/ComponentRosJoystick.component#//@component/@elements.0/@extensions.0"/>
+          <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+          <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+          <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+          <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_he5KMO1rEeinaYXKlN_2KA" borderSize="1" borderSizeComputationExpression="1" foregroundColor="255,255,255">
+            <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']/@subContainerMappings[name='DefaultPeriodicTimerContainer']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@containerMappings[name='ComponentContainer']/@subContainerMappings[name='ActivityContainer']/@subContainerMappings[name='DefaultPeriodicTimerContainer']"/>
+        </ownedDiagramElements>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_fUXMUO1rEeinaYXKlN_2KA" sourceNode="_cy-0sO1rEeinaYXKlN_2KA" targetNode="_fUST0O1rEeinaYXKlN_2KA">
+      <target xmi:type="ComponentDefinition:OutputPort" href="model/ComponentRosJoystick.component#//@component/@elements.1"/>
+      <semanticElements xmi:type="ComponentDefinition:OutputPort" href="model/ComponentRosJoystick.component#//@component/@elements.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_fUXzYO1rEeinaYXKlN_2KA" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@edgeMappings[name='ActivityOutputEdge']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_fUXzYe1rEeinaYXKlN_2KA"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer/@edgeMappings[name='ActivityOutputEdge']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_XrLNZu1rEeinaYXKlN_2KA"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.sirius.component.design/description/component.odesign#//@ownedViewpoints[name='ComponentDefinitionViewpoint']/@ownedRepresentations[name='ComponentDefinitionDiagram']/@defaultLayer"/>
+    <target xmi:type="ComponentDefinition:ComponentDefModel" href="model/ComponentRosJoystick.component#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.seronet_projekt.xtext.component.rosPortExtension
+Bundle-Vendor: SeRoNet (www.seronet-projekt.de)
+Bundle-Version: 3.7.0.qualifier
+Bundle-SymbolicName: de.seronet_projekt.xtext.component.rosPortExtension; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: de.seronet_projekt.ecore.component.rosPortExtension,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib,
+ org.antlr.runtime,
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: de.seronet_projekt.xtext.component.rosPortExtension.generator,
+ de.seronet_projekt.xtext.component.rosPortExtension.parser.antlr.internal,
+ de.seronet_projekt.xtext.component.rosPortExtension.serializer,
+ de.seronet_projekt.xtext.component.rosPortExtension.services,
+ de.seronet_projekt.xtext.component.rosPortExtension.scoping,
+ de.seronet_projekt.xtext.component.rosPortExtension,
+ de.seronet_projekt.xtext.component.rosPortExtension.validation,
+ de.seronet_projekt.xtext.component.rosPortExtension.formatting2,
+ de.seronet_projekt.xtext.component.rosPortExtension.parser.antlr
+Import-Package: org.apache.log4j
+Automatic-Module-Name: de.seronet_projekt.xtext.component.rosPortExtension

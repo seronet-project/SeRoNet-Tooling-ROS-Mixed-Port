@@ -1,0 +1,3 @@
+ExtendsComponent ComponentRosJoystick {
+	RosPortSelection _joy;
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.seronet_projekt.xtext.component.rosPortExtension.RosPortExtensionGeneratorEP">
+      <generator
+            class="de.seronet_projekt.xtend.ROS.generator.ROSGenerator">
+      </generator>
+   </extension>
+   <extension
+         point="org.xtend.smartsoft.generator.ComponentGeneratorExtension">
+      <ComponentGeneratorExtension
+            class="de.seronet_projekt.xtend.ROS.generator.ext.ROSComponentGeneratorExtension">
+      </ComponentGeneratorExtension>
+   </extension>
+
+</plugin>

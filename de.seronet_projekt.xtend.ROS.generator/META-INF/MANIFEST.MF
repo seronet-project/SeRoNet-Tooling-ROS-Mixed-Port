@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ROSGenerator
+Bundle-SymbolicName: de.seronet_projekt.xtend.ROS.generator;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: org.xtend.ROS.generator
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.core.resources,
+ org.eclipse.xtext.generator,
+ org.eclipse.emf.mwe.utils,
+ com.google.inject,
+ org.eclipse.core.commands,
+ org.eclipse.xtext.util,
+ org.eclipse.ui.workbench,
+ org.eclipse.xtext,
+ de.seronet_projekt.ros.interfaces.pool,
+ org.xtend.smartsoft.generator,
+ de.seronet_projekt.ecore.component.rosPortExtension,
+ de.seronet_projekt.xtext.component.rosPortExtension
+Bundle-Vendor: SeRoNet (www.seronet-projekt.de)

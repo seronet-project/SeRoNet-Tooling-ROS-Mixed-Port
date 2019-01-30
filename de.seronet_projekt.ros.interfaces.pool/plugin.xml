@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated rosInterfacesPool -->
+      <package
+            uri="http://www.seronet-projekt.de/rosInterfacesPool"
+            class="rosInterfacesPool.RosInterfacesPoolPackage"
+            genModel="model/rosInterfacesPool.genmodel"/>
+   </extension>
+
+</plugin>
