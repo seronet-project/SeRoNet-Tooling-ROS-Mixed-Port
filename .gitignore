@@ -1,0 +1,7 @@
+.metadata/
+.recommenders/
+*.xtendbin
+*._trace
+bin/
+xtend-gen/
+build/
