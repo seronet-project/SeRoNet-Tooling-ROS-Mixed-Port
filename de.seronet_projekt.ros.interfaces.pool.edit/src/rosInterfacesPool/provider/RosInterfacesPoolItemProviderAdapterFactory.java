@@ -187,6 +187,52 @@ public class RosInterfacesPoolItemProviderAdapterFactory extends RosInterfacesPo
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link rosInterfacesPool.RosActionServer} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RosActionServerItemProvider rosActionServerItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link rosInterfacesPool.RosActionServer}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRosActionServerAdapter() {
+		if (rosActionServerItemProvider == null) {
+			rosActionServerItemProvider = new RosActionServerItemProvider(this);
+		}
+
+		return rosActionServerItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link rosInterfacesPool.RosActionClient} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RosActionClientItemProvider rosActionClientItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link rosInterfacesPool.RosActionClient}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRosActionClientAdapter() {
+		if (rosActionClientItemProvider == null) {
+			rosActionClientItemProvider = new RosActionClientItemProvider(this);
+		}
+
+		return rosActionClientItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -290,6 +336,8 @@ public class RosInterfacesPoolItemProviderAdapterFactory extends RosInterfacesPo
 		if (rosSubscriberItemProvider != null) rosSubscriberItemProvider.dispose();
 		if (rosSrvServerItemProvider != null) rosSrvServerItemProvider.dispose();
 		if (rosSrvClientItemProvider != null) rosSrvClientItemProvider.dispose();
+		if (rosActionServerItemProvider != null) rosActionServerItemProvider.dispose();
+		if (rosActionClientItemProvider != null) rosActionClientItemProvider.dispose();
 	}
 
 }

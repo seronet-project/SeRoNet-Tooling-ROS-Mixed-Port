@@ -23,4 +23,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="RosInterface" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RosActionServer" eSuperTypes="#//RosAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RosActionClient" eSuperTypes="#//RosAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RosAction" abstract="true" eSuperTypes="#//RosInterface">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>
