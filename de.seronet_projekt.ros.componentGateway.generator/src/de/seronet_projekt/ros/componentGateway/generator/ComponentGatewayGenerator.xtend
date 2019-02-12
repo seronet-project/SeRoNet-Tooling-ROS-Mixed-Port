@@ -48,10 +48,16 @@ RosInterfacesPool {
 	RosPublisher «checkname(sub.name)» { topicName "«sub.name»" type "«sub.subscriber.message.package.name».«sub.subscriber.message.name»" }
 	«ENDFOR»
 	«FOR srvserver:componentinterface.rosserviceserver»
-	RosSrvClient «checkname(srvserver.name)» { srvName "«srvserver.name»" type "«srvserver.srvserver.service.package.name».«srvserver.srvserver.service.name»" }
+	RosSrvServer «checkname(srvserver.name)» { srvName "«srvserver.name»" type "«srvserver.srvserver.service.package.name».«srvserver.srvserver.service.name»" }
 	«ENDFOR»
 	«FOR srvclient:componentinterface.rosserviceclient»
-	RosSrvServer «checkname(srvclient.name)» { srvName "«srvclient.name»" type "«srvclient.srvclient.service.name».«srvclient.srvclient.name»" }
+	RosSrvClient «checkname(srvclient.name)» { srvName "«srvclient.name»" type "«srvclient.srvclient.service.package.name».«srvclient.srvclient.service.name»" }
+	«ENDFOR»
+	«FOR actionserver:componentinterface.rosactionserver»
+	RosActionServer «checkname(actionserver.name)» { actionName "«actionserver.name»" type "«actionserver.actserver.action.package.name».«actionserver.actserver.action.name»" }
+	«ENDFOR»
+	«FOR actionclient:componentinterface.rosactionclient»
+	RosActionClient «checkname(actionclient.name)» { actionName "«actionclient.name»" type "«actionclient.actclient.action.package.name».«actionclient.actclient.action.name»" }
 	«ENDFOR»
 }
 	'''
