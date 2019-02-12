@@ -150,6 +150,15 @@ ruleRosInterface returns [EObject current=null]
 			$current = $this_RosService_1.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getRosInterfaceAccess().getRosActionParserRuleCall_2());
+		}
+		this_RosAction_2=ruleRosAction
+		{
+			$current = $this_RosAction_2.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -220,6 +229,42 @@ ruleRosService returns [EObject current=null]
 		this_RosSrvClient_1=ruleRosSrvClient
 		{
 			$current = $this_RosSrvClient_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleRosAction
+entryRuleRosAction returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRosActionRule()); }
+	iv_ruleRosAction=ruleRosAction
+	{ $current=$iv_ruleRosAction.current; }
+	EOF;
+
+// Rule RosAction
+ruleRosAction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getRosActionAccess().getRosActionServerParserRuleCall_0());
+		}
+		this_RosActionServer_0=ruleRosActionServer
+		{
+			$current = $this_RosActionServer_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getRosActionAccess().getRosActionClientParserRuleCall_1());
+		}
+		this_RosActionClient_1=ruleRosActionClient
+		{
+			$current = $this_RosActionClient_1.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -601,6 +646,196 @@ ruleRosSrvClient returns [EObject current=null]
 		otherlv_7='}'
 		{
 			newLeafNode(otherlv_7, grammarAccess.getRosSrvClientAccess().getRightCurlyBracketKeyword_7());
+		}
+	)
+;
+
+// Entry rule entryRuleRosActionServer
+entryRuleRosActionServer returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRosActionServerRule()); }
+	iv_ruleRosActionServer=ruleRosActionServer
+	{ $current=$iv_ruleRosActionServer.current; }
+	EOF;
+
+// Rule RosActionServer
+ruleRosActionServer returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='RosActionServer'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getRosActionServerAccess().getRosActionServerKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getRosActionServerAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRosActionServerRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2='{'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getRosActionServerAccess().getLeftCurlyBracketKeyword_2());
+		}
+		otherlv_3='actionName'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getRosActionServerAccess().getActionNameKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getRosActionServerAccess().getActionNameEStringParserRuleCall_4_0());
+				}
+				lv_actionName_4_0=ruleEString
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getRosActionServerRule());
+					}
+					set(
+						$current,
+						"actionName",
+						lv_actionName_4_0,
+						"de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.EString");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_5='type'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getRosActionServerAccess().getTypeKeyword_5());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getRosActionServerAccess().getTypeEStringParserRuleCall_6_0());
+				}
+				lv_type_6_0=ruleEString
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getRosActionServerRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_6_0,
+						"de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.EString");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_7='}'
+		{
+			newLeafNode(otherlv_7, grammarAccess.getRosActionServerAccess().getRightCurlyBracketKeyword_7());
+		}
+	)
+;
+
+// Entry rule entryRuleRosActionClient
+entryRuleRosActionClient returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRosActionClientRule()); }
+	iv_ruleRosActionClient=ruleRosActionClient
+	{ $current=$iv_ruleRosActionClient.current; }
+	EOF;
+
+// Rule RosActionClient
+ruleRosActionClient returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='RosActionClient'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getRosActionClientAccess().getRosActionClientKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getRosActionClientAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRosActionClientRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2='{'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getRosActionClientAccess().getLeftCurlyBracketKeyword_2());
+		}
+		otherlv_3='actionName'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getRosActionClientAccess().getActionNameKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getRosActionClientAccess().getActionNameEStringParserRuleCall_4_0());
+				}
+				lv_actionName_4_0=ruleEString
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getRosActionClientRule());
+					}
+					set(
+						$current,
+						"actionName",
+						lv_actionName_4_0,
+						"de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.EString");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_5='type'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getRosActionClientAccess().getTypeKeyword_5());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getRosActionClientAccess().getTypeEStringParserRuleCall_6_0());
+				}
+				lv_type_6_0=ruleEString
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getRosActionClientRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_6_0,
+						"de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.EString");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_7='}'
+		{
+			newLeafNode(otherlv_7, grammarAccess.getRosActionClientAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
 ;

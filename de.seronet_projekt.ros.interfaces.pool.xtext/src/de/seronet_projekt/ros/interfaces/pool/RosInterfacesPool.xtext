@@ -12,7 +12,7 @@ RosInterfacesPool returns RosInterfacesPool:
 	'}';
 
 RosInterface returns RosInterface:
-	RosTopic | RosService;
+	RosTopic | RosService | RosAction;
 
 
 RosTopic returns RosTopic: 
@@ -21,6 +21,10 @@ RosTopic returns RosTopic:
 
 RosService returns RosService: 
 	RosSrvServer | RosSrvClient
+;
+
+RosAction returns RosAction: 
+	RosActionServer | RosActionClient
 ;
 
 RosPublisher returns RosPublisher:
@@ -48,6 +52,20 @@ RosSrvClient returns RosSrvClient:
 	'RosSrvClient'  name=ID
 	'{'
 		'srvName' srvName=EString
+		'type' type=EString
+	'}';
+	
+RosActionServer returns RosActionServer:
+	'RosActionServer'  name=ID
+	'{'
+		'actionName' actionName=EString
+		'type' type=EString
+	'}';
+
+RosActionClient returns RosActionClient:
+	'RosActionClient'  name=ID
+	'{'
+		'actionName' actionName=EString
 		'type' type=EString
 	'}';
 
