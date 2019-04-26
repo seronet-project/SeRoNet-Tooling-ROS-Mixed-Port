@@ -24,5 +24,11 @@
     <genClasses image="false" ecoreClass="rosInterfacesPool.ecore#//RosInterface">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rosInterfacesPool.ecore#//RosInterface/name"/>
     </genClasses>
+    <genClasses ecoreClass="rosInterfacesPool.ecore#//RosActionServer"/>
+    <genClasses ecoreClass="rosInterfacesPool.ecore#//RosActionClient"/>
+    <genClasses image="false" ecoreClass="rosInterfacesPool.ecore#//RosAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rosInterfacesPool.ecore#//RosAction/actionName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute rosInterfacesPool.ecore#//RosAction/type"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

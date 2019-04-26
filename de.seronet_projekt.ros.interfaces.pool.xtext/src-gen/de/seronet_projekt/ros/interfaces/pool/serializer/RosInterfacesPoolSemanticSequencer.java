@@ -15,6 +15,8 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import rosInterfacesPool.RosActionClient;
+import rosInterfacesPool.RosActionServer;
 import rosInterfacesPool.RosInterfacesPool;
 import rosInterfacesPool.RosInterfacesPoolPackage;
 import rosInterfacesPool.RosPublisher;
@@ -36,6 +38,12 @@ public class RosInterfacesPoolSemanticSequencer extends AbstractDelegatingSemant
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == RosInterfacesPoolPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case RosInterfacesPoolPackage.ROS_ACTION_CLIENT:
+				sequence_RosActionClient(context, (RosActionClient) semanticObject); 
+				return; 
+			case RosInterfacesPoolPackage.ROS_ACTION_SERVER:
+				sequence_RosActionServer(context, (RosActionServer) semanticObject); 
+				return; 
 			case RosInterfacesPoolPackage.ROS_INTERFACES_POOL:
 				sequence_RosInterfacesPool(context, (RosInterfacesPool) semanticObject); 
 				return; 
@@ -55,6 +63,58 @@ public class RosInterfacesPoolSemanticSequencer extends AbstractDelegatingSemant
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     RosInterface returns RosActionClient
+	 *     RosAction returns RosActionClient
+	 *     RosActionClient returns RosActionClient
+	 *
+	 * Constraint:
+	 *     (name=ID actionName=EString type=EString)
+	 */
+	protected void sequence_RosActionClient(ISerializationContext context, RosActionClient semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RosInterfacesPoolPackage.Literals.ROS_INTERFACE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RosInterfacesPoolPackage.Literals.ROS_INTERFACE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RosInterfacesPoolPackage.Literals.ROS_ACTION__ACTION_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RosInterfacesPoolPackage.Literals.ROS_ACTION__ACTION_NAME));
+			if (transientValues.isValueTransient(semanticObject, RosInterfacesPoolPackage.Literals.ROS_ACTION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RosInterfacesPoolPackage.Literals.ROS_ACTION__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRosActionClientAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRosActionClientAccess().getActionNameEStringParserRuleCall_4_0(), semanticObject.getActionName());
+		feeder.accept(grammarAccess.getRosActionClientAccess().getTypeEStringParserRuleCall_6_0(), semanticObject.getType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RosInterface returns RosActionServer
+	 *     RosAction returns RosActionServer
+	 *     RosActionServer returns RosActionServer
+	 *
+	 * Constraint:
+	 *     (name=ID actionName=EString type=EString)
+	 */
+	protected void sequence_RosActionServer(ISerializationContext context, RosActionServer semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RosInterfacesPoolPackage.Literals.ROS_INTERFACE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RosInterfacesPoolPackage.Literals.ROS_INTERFACE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RosInterfacesPoolPackage.Literals.ROS_ACTION__ACTION_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RosInterfacesPoolPackage.Literals.ROS_ACTION__ACTION_NAME));
+			if (transientValues.isValueTransient(semanticObject, RosInterfacesPoolPackage.Literals.ROS_ACTION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RosInterfacesPoolPackage.Literals.ROS_ACTION__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRosActionServerAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRosActionServerAccess().getActionNameEStringParserRuleCall_4_0(), semanticObject.getActionName());
+		feeder.accept(grammarAccess.getRosActionServerAccess().getTypeEStringParserRuleCall_6_0(), semanticObject.getType());
+		feeder.finish();
+	}
+	
 	
 	/**
 	 * Contexts:

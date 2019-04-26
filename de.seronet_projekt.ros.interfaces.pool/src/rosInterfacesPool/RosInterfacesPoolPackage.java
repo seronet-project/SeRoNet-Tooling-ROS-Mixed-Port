@@ -462,6 +462,172 @@ public interface RosInterfacesPoolPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link rosInterfacesPool.impl.RosActionImpl <em>Ros Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rosInterfacesPool.impl.RosActionImpl
+	 * @see rosInterfacesPool.impl.RosInterfacesPoolPackageImpl#getRosAction()
+	 * @generated
+	 */
+	int ROS_ACTION = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION__NAME = ROS_INTERFACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Action Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION__ACTION_NAME = ROS_INTERFACE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION__TYPE = ROS_INTERFACE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Ros Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_FEATURE_COUNT = ROS_INTERFACE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Ros Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_OPERATION_COUNT = ROS_INTERFACE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link rosInterfacesPool.impl.RosActionServerImpl <em>Ros Action Server</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rosInterfacesPool.impl.RosActionServerImpl
+	 * @see rosInterfacesPool.impl.RosInterfacesPoolPackageImpl#getRosActionServer()
+	 * @generated
+	 */
+	int ROS_ACTION_SERVER = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_SERVER__NAME = ROS_ACTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Action Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_SERVER__ACTION_NAME = ROS_ACTION__ACTION_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_SERVER__TYPE = ROS_ACTION__TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Ros Action Server</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_SERVER_FEATURE_COUNT = ROS_ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Ros Action Server</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_SERVER_OPERATION_COUNT = ROS_ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link rosInterfacesPool.impl.RosActionClientImpl <em>Ros Action Client</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see rosInterfacesPool.impl.RosActionClientImpl
+	 * @see rosInterfacesPool.impl.RosInterfacesPoolPackageImpl#getRosActionClient()
+	 * @generated
+	 */
+	int ROS_ACTION_CLIENT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_CLIENT__NAME = ROS_ACTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Action Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_CLIENT__ACTION_NAME = ROS_ACTION__ACTION_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_CLIENT__TYPE = ROS_ACTION__TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Ros Action Client</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_CLIENT_FEATURE_COUNT = ROS_ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Ros Action Client</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_ACTION_CLIENT_OPERATION_COUNT = ROS_ACTION_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link rosInterfacesPool.RosInterfacesPool <em>Ros Interfaces Pool</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -606,6 +772,58 @@ public interface RosInterfacesPoolPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getRosInterface_Name();
+
+	/**
+	 * Returns the meta object for class '{@link rosInterfacesPool.RosActionServer <em>Ros Action Server</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ros Action Server</em>'.
+	 * @see rosInterfacesPool.RosActionServer
+	 * @generated
+	 */
+	EClass getRosActionServer();
+
+	/**
+	 * Returns the meta object for class '{@link rosInterfacesPool.RosActionClient <em>Ros Action Client</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ros Action Client</em>'.
+	 * @see rosInterfacesPool.RosActionClient
+	 * @generated
+	 */
+	EClass getRosActionClient();
+
+	/**
+	 * Returns the meta object for class '{@link rosInterfacesPool.RosAction <em>Ros Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ros Action</em>'.
+	 * @see rosInterfacesPool.RosAction
+	 * @generated
+	 */
+	EClass getRosAction();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rosInterfacesPool.RosAction#getActionName <em>Action Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Action Name</em>'.
+	 * @see rosInterfacesPool.RosAction#getActionName()
+	 * @see #getRosAction()
+	 * @generated
+	 */
+	EAttribute getRosAction_ActionName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link rosInterfacesPool.RosAction#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see rosInterfacesPool.RosAction#getType()
+	 * @see #getRosAction()
+	 * @generated
+	 */
+	EAttribute getRosAction_Type();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -757,6 +975,52 @@ public interface RosInterfacesPoolPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ROS_INTERFACE__NAME = eINSTANCE.getRosInterface_Name();
+
+		/**
+		 * The meta object literal for the '{@link rosInterfacesPool.impl.RosActionServerImpl <em>Ros Action Server</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rosInterfacesPool.impl.RosActionServerImpl
+		 * @see rosInterfacesPool.impl.RosInterfacesPoolPackageImpl#getRosActionServer()
+		 * @generated
+		 */
+		EClass ROS_ACTION_SERVER = eINSTANCE.getRosActionServer();
+
+		/**
+		 * The meta object literal for the '{@link rosInterfacesPool.impl.RosActionClientImpl <em>Ros Action Client</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rosInterfacesPool.impl.RosActionClientImpl
+		 * @see rosInterfacesPool.impl.RosInterfacesPoolPackageImpl#getRosActionClient()
+		 * @generated
+		 */
+		EClass ROS_ACTION_CLIENT = eINSTANCE.getRosActionClient();
+
+		/**
+		 * The meta object literal for the '{@link rosInterfacesPool.impl.RosActionImpl <em>Ros Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see rosInterfacesPool.impl.RosActionImpl
+		 * @see rosInterfacesPool.impl.RosInterfacesPoolPackageImpl#getRosAction()
+		 * @generated
+		 */
+		EClass ROS_ACTION = eINSTANCE.getRosAction();
+
+		/**
+		 * The meta object literal for the '<em><b>Action Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ROS_ACTION__ACTION_NAME = eINSTANCE.getRosAction_ActionName();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ROS_ACTION__TYPE = eINSTANCE.getRosAction_Type();
 
 	}
 

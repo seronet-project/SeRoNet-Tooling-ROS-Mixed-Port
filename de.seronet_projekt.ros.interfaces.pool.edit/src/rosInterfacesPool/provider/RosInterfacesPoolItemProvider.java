@@ -166,6 +166,16 @@ public class RosInterfacesPoolItemProvider
 			(createChildParameter
 				(RosInterfacesPoolPackage.Literals.ROS_INTERFACES_POOL__INTERFACES,
 				 RosInterfacesPoolFactory.eINSTANCE.createRosSrvClient()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(RosInterfacesPoolPackage.Literals.ROS_INTERFACES_POOL__INTERFACES,
+				 RosInterfacesPoolFactory.eINSTANCE.createRosActionServer()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(RosInterfacesPoolPackage.Literals.ROS_INTERFACES_POOL__INTERFACES,
+				 RosInterfacesPoolFactory.eINSTANCE.createRosActionClient()));
 	}
 
 	/**

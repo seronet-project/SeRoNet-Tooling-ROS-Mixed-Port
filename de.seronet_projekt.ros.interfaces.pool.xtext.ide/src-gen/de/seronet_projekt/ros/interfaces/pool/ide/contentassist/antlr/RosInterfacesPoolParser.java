@@ -34,11 +34,14 @@ public class RosInterfacesPoolParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRosInterfaceAccess().getAlternatives(), "rule__RosInterface__Alternatives");
 					put(grammarAccess.getRosTopicAccess().getAlternatives(), "rule__RosTopic__Alternatives");
 					put(grammarAccess.getRosServiceAccess().getAlternatives(), "rule__RosService__Alternatives");
+					put(grammarAccess.getRosActionAccess().getAlternatives(), "rule__RosAction__Alternatives");
 					put(grammarAccess.getRosInterfacesPoolAccess().getGroup(), "rule__RosInterfacesPool__Group__0");
 					put(grammarAccess.getRosPublisherAccess().getGroup(), "rule__RosPublisher__Group__0");
 					put(grammarAccess.getRosSubscriberAccess().getGroup(), "rule__RosSubscriber__Group__0");
 					put(grammarAccess.getRosSrvServerAccess().getGroup(), "rule__RosSrvServer__Group__0");
 					put(grammarAccess.getRosSrvClientAccess().getGroup(), "rule__RosSrvClient__Group__0");
+					put(grammarAccess.getRosActionServerAccess().getGroup(), "rule__RosActionServer__Group__0");
+					put(grammarAccess.getRosActionClientAccess().getGroup(), "rule__RosActionClient__Group__0");
 					put(grammarAccess.getRosInterfacesPoolAccess().getInterfacesAssignment_3(), "rule__RosInterfacesPool__InterfacesAssignment_3");
 					put(grammarAccess.getRosPublisherAccess().getNameAssignment_1(), "rule__RosPublisher__NameAssignment_1");
 					put(grammarAccess.getRosPublisherAccess().getTopicNameAssignment_4(), "rule__RosPublisher__TopicNameAssignment_4");
@@ -52,6 +55,12 @@ public class RosInterfacesPoolParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRosSrvClientAccess().getNameAssignment_1(), "rule__RosSrvClient__NameAssignment_1");
 					put(grammarAccess.getRosSrvClientAccess().getSrvNameAssignment_4(), "rule__RosSrvClient__SrvNameAssignment_4");
 					put(grammarAccess.getRosSrvClientAccess().getTypeAssignment_6(), "rule__RosSrvClient__TypeAssignment_6");
+					put(grammarAccess.getRosActionServerAccess().getNameAssignment_1(), "rule__RosActionServer__NameAssignment_1");
+					put(grammarAccess.getRosActionServerAccess().getActionNameAssignment_4(), "rule__RosActionServer__ActionNameAssignment_4");
+					put(grammarAccess.getRosActionServerAccess().getTypeAssignment_6(), "rule__RosActionServer__TypeAssignment_6");
+					put(grammarAccess.getRosActionClientAccess().getNameAssignment_1(), "rule__RosActionClient__NameAssignment_1");
+					put(grammarAccess.getRosActionClientAccess().getActionNameAssignment_4(), "rule__RosActionClient__ActionNameAssignment_4");
+					put(grammarAccess.getRosActionClientAccess().getTypeAssignment_6(), "rule__RosActionClient__TypeAssignment_6");
 				}
 			};
 		}

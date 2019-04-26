@@ -67,12 +67,13 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cRosTopicParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRosServiceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cRosActionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//RosInterface:
-		//	RosTopic | RosService;
+		//	RosTopic | RosService | RosAction;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//RosTopic | RosService
+		//RosTopic | RosService | RosAction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//RosTopic
@@ -80,6 +81,9 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 		
 		//RosService
 		public RuleCall getRosServiceParserRuleCall_1() { return cRosServiceParserRuleCall_1; }
+		
+		//RosAction
+		public RuleCall getRosActionParserRuleCall_2() { return cRosActionParserRuleCall_2; }
 	}
 	public class RosTopicElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.RosTopic");
@@ -118,6 +122,25 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 		
 		//RosSrvClient
 		public RuleCall getRosSrvClientParserRuleCall_1() { return cRosSrvClientParserRuleCall_1; }
+	}
+	public class RosActionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.RosAction");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cRosActionServerParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cRosActionClientParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//RosAction:
+		//	RosActionServer | RosActionClient;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//RosActionServer | RosActionClient
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//RosActionServer
+		public RuleCall getRosActionServerParserRuleCall_0() { return cRosActionServerParserRuleCall_0; }
+		
+		//RosActionClient
+		public RuleCall getRosActionClientParserRuleCall_1() { return cRosActionClientParserRuleCall_1; }
 	}
 	public class RosPublisherElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.RosPublisher");
@@ -355,6 +378,124 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
+	public class RosActionServerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.RosActionServer");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRosActionServerKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cActionNameKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cActionNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cActionNameEStringParserRuleCall_4_0 = (RuleCall)cActionNameAssignment_4.eContents().get(0);
+		private final Keyword cTypeKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cTypeAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cTypeEStringParserRuleCall_6_0 = (RuleCall)cTypeAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//RosActionServer:
+		//	'RosActionServer' name=ID
+		//	'{'
+		//	'actionName' actionName=EString
+		//	'type' type=EString
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'RosActionServer' name=ID '{' 'actionName' actionName=EString 'type' type=EString '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'RosActionServer'
+		public Keyword getRosActionServerKeyword_0() { return cRosActionServerKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//'actionName'
+		public Keyword getActionNameKeyword_3() { return cActionNameKeyword_3; }
+		
+		//actionName=EString
+		public Assignment getActionNameAssignment_4() { return cActionNameAssignment_4; }
+		
+		//EString
+		public RuleCall getActionNameEStringParserRuleCall_4_0() { return cActionNameEStringParserRuleCall_4_0; }
+		
+		//'type'
+		public Keyword getTypeKeyword_5() { return cTypeKeyword_5; }
+		
+		//type=EString
+		public Assignment getTypeAssignment_6() { return cTypeAssignment_6; }
+		
+		//EString
+		public RuleCall getTypeEStringParserRuleCall_6_0() { return cTypeEStringParserRuleCall_6_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+	}
+	public class RosActionClientElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.RosActionClient");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRosActionClientKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cActionNameKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cActionNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cActionNameEStringParserRuleCall_4_0 = (RuleCall)cActionNameAssignment_4.eContents().get(0);
+		private final Keyword cTypeKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cTypeAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cTypeEStringParserRuleCall_6_0 = (RuleCall)cTypeAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//RosActionClient:
+		//	'RosActionClient' name=ID
+		//	'{'
+		//	'actionName' actionName=EString
+		//	'type' type=EString
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'RosActionClient' name=ID '{' 'actionName' actionName=EString 'type' type=EString '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'RosActionClient'
+		public Keyword getRosActionClientKeyword_0() { return cRosActionClientKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//'actionName'
+		public Keyword getActionNameKeyword_3() { return cActionNameKeyword_3; }
+		
+		//actionName=EString
+		public Assignment getActionNameAssignment_4() { return cActionNameAssignment_4; }
+		
+		//EString
+		public RuleCall getActionNameEStringParserRuleCall_4_0() { return cActionNameEStringParserRuleCall_4_0; }
+		
+		//'type'
+		public Keyword getTypeKeyword_5() { return cTypeKeyword_5; }
+		
+		//type=EString
+		public Assignment getTypeAssignment_6() { return cTypeAssignment_6; }
+		
+		//EString
+		public RuleCall getTypeEStringParserRuleCall_6_0() { return cTypeEStringParserRuleCall_6_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+	}
 	public class EStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.seronet_projekt.ros.interfaces.pool.RosInterfacesPool.EString");
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
@@ -372,10 +513,13 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 	private final RosInterfaceElements pRosInterface;
 	private final RosTopicElements pRosTopic;
 	private final RosServiceElements pRosService;
+	private final RosActionElements pRosAction;
 	private final RosPublisherElements pRosPublisher;
 	private final RosSubscriberElements pRosSubscriber;
 	private final RosSrvServerElements pRosSrvServer;
 	private final RosSrvClientElements pRosSrvClient;
+	private final RosActionServerElements pRosActionServer;
+	private final RosActionClientElements pRosActionClient;
 	private final EStringElements pEString;
 	
 	private final Grammar grammar;
@@ -391,10 +535,13 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 		this.pRosInterface = new RosInterfaceElements();
 		this.pRosTopic = new RosTopicElements();
 		this.pRosService = new RosServiceElements();
+		this.pRosAction = new RosActionElements();
 		this.pRosPublisher = new RosPublisherElements();
 		this.pRosSubscriber = new RosSubscriberElements();
 		this.pRosSrvServer = new RosSrvServerElements();
 		this.pRosSrvClient = new RosSrvClientElements();
+		this.pRosActionServer = new RosActionServerElements();
+		this.pRosActionClient = new RosActionClientElements();
 		this.pEString = new EStringElements();
 	}
 	
@@ -440,7 +587,7 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 	}
 	
 	//RosInterface:
-	//	RosTopic | RosService;
+	//	RosTopic | RosService | RosAction;
 	public RosInterfaceElements getRosInterfaceAccess() {
 		return pRosInterface;
 	}
@@ -467,6 +614,16 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 	
 	public ParserRule getRosServiceRule() {
 		return getRosServiceAccess().getRule();
+	}
+	
+	//RosAction:
+	//	RosActionServer | RosActionClient;
+	public RosActionElements getRosActionAccess() {
+		return pRosAction;
+	}
+	
+	public ParserRule getRosActionRule() {
+		return getRosActionAccess().getRule();
 	}
 	
 	//RosPublisher:
@@ -523,6 +680,34 @@ public class RosInterfacesPoolGrammarAccess extends AbstractGrammarElementFinder
 	
 	public ParserRule getRosSrvClientRule() {
 		return getRosSrvClientAccess().getRule();
+	}
+	
+	//RosActionServer:
+	//	'RosActionServer' name=ID
+	//	'{'
+	//	'actionName' actionName=EString
+	//	'type' type=EString
+	//	'}';
+	public RosActionServerElements getRosActionServerAccess() {
+		return pRosActionServer;
+	}
+	
+	public ParserRule getRosActionServerRule() {
+		return getRosActionServerAccess().getRule();
+	}
+	
+	//RosActionClient:
+	//	'RosActionClient' name=ID
+	//	'{'
+	//	'actionName' actionName=EString
+	//	'type' type=EString
+	//	'}';
+	public RosActionClientElements getRosActionClientAccess() {
+		return pRosActionClient;
+	}
+	
+	public ParserRule getRosActionClientRule() {
+		return getRosActionClientAccess().getRule();
 	}
 	
 	//EString:

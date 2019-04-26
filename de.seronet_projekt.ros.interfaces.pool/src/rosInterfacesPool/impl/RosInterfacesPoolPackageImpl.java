@@ -9,6 +9,9 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import rosInterfacesPool.RosAction;
+import rosInterfacesPool.RosActionClient;
+import rosInterfacesPool.RosActionServer;
 import rosInterfacesPool.RosInterface;
 import rosInterfacesPool.RosInterfacesPool;
 import rosInterfacesPool.RosInterfacesPoolFactory;
@@ -82,6 +85,27 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * @generated
 	 */
 	private EClass rosInterfaceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rosActionServerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rosActionClientEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rosActionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -275,6 +299,51 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRosActionServer() {
+		return rosActionServerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRosActionClient() {
+		return rosActionClientEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRosAction() {
+		return rosActionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRosAction_ActionName() {
+		return (EAttribute)rosActionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRosAction_Type() {
+		return (EAttribute)rosActionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public RosInterfacesPoolFactory getRosInterfacesPoolFactory() {
 		return (RosInterfacesPoolFactory)getEFactoryInstance();
 	}
@@ -319,6 +388,14 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 
 		rosInterfaceEClass = createEClass(ROS_INTERFACE);
 		createEAttribute(rosInterfaceEClass, ROS_INTERFACE__NAME);
+
+		rosActionServerEClass = createEClass(ROS_ACTION_SERVER);
+
+		rosActionClientEClass = createEClass(ROS_ACTION_CLIENT);
+
+		rosActionEClass = createEClass(ROS_ACTION);
+		createEAttribute(rosActionEClass, ROS_ACTION__ACTION_NAME);
+		createEAttribute(rosActionEClass, ROS_ACTION__TYPE);
 	}
 
 	/**
@@ -355,6 +432,9 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 		rosSubscriberEClass.getESuperTypes().add(this.getRosTopic());
 		rosSrvServerEClass.getESuperTypes().add(this.getRosService());
 		rosSrvClientEClass.getESuperTypes().add(this.getRosService());
+		rosActionServerEClass.getESuperTypes().add(this.getRosAction());
+		rosActionClientEClass.getESuperTypes().add(this.getRosAction());
+		rosActionEClass.getESuperTypes().add(this.getRosInterface());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(rosInterfacesPoolEClass, RosInterfacesPool.class, "RosInterfacesPool", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -378,6 +458,14 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 
 		initEClass(rosInterfaceEClass, RosInterface.class, "RosInterface", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRosInterface_Name(), ecorePackage.getEString(), "name", null, 1, 1, RosInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(rosActionServerEClass, RosActionServer.class, "RosActionServer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(rosActionClientEClass, RosActionClient.class, "RosActionClient", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(rosActionEClass, RosAction.class, "RosAction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRosAction_ActionName(), ecorePackage.getEString(), "actionName", null, 1, 1, RosAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRosAction_Type(), ecorePackage.getEString(), "type", null, 1, 1, RosAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

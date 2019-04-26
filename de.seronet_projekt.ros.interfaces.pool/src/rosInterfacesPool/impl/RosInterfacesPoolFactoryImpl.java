@@ -61,6 +61,8 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 			case RosInterfacesPoolPackage.ROS_SUBSCRIBER: return createRosSubscriber();
 			case RosInterfacesPoolPackage.ROS_SRV_SERVER: return createRosSrvServer();
 			case RosInterfacesPoolPackage.ROS_SRV_CLIENT: return createRosSrvClient();
+			case RosInterfacesPoolPackage.ROS_ACTION_SERVER: return createRosActionServer();
+			case RosInterfacesPoolPackage.ROS_ACTION_CLIENT: return createRosActionClient();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -114,6 +116,26 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	public RosSrvClient createRosSrvClient() {
 		RosSrvClientImpl rosSrvClient = new RosSrvClientImpl();
 		return rosSrvClient;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RosActionServer createRosActionServer() {
+		RosActionServerImpl rosActionServer = new RosActionServerImpl();
+		return rosActionServer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RosActionClient createRosActionClient() {
+		RosActionClientImpl rosActionClient = new RosActionClientImpl();
+		return rosActionClient;
 	}
 
 	/**
