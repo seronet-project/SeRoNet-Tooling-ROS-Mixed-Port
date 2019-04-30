@@ -15,13 +15,11 @@ The ROS Mixed-Port Component is developed by:
 **CAUTION: This software is a preview for the purpose of technology demonstration. It is experimental and comes with no support. Use at your own risk.**
 
 
-The implemenentation of the ROS-SeRoNet Mixed-Port component is realized in two Domain-Specific Languages (DSLs).
+The implemenentation of the ROS-SeRoNet Mixed-Port component is realized as a Domain-Specific Language (DSL):.
 
 - **RosInterfacesPool**: This is a stand-alone DSL that defines a pool of ROS interface specifications that is used by the next DSL to select the ROS-related communication interfaces of a SeRoNet Mixed-Port component.
-- **RosPortExtension**: This DSL directly links the SeRoNet ComponentDefinition model with selected ROS communication port definitions from the above RosInterfacesPool DSL. This DSL is not stand-alone, but requires the ComponentDefinition DSL that is provided (among others) here: https://github.com/Servicerobotics-Ulm/SmartMDSD-Toolchain
 
 - Example for **RosInterfacesPool** DSL can be found here: example/joy.rosinterfacespool
-- Example for **RosPortExtension** DSL can be found here: ROS-MixedPort-Examples/ComponentRosJoystick/model/ComponentRosJoystick.componentRosPorts
 
 Technical Maintainer: [**ipa-nhg**](https://github.com/ipa-nhg/) (**Nadia Hammoudeh Garcia**, **Fraunhofer IPA**) and [**alex-lotz**](https://github.com/alex-lotz) (**Alex Lotz**, **Hochschule Ulm**)
 
