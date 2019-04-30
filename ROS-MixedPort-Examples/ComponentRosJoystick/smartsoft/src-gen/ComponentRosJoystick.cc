@@ -34,6 +34,7 @@ ComponentRosJoystick::ComponentRosJoystick()
 	joystickActivity = NULL;
 	joystickActivityTrigger = NULL;
 	joystickServiceOut = NULL;
+	//_joy = NULL;
 	stateChangeHandler = NULL;
 	stateSlave = NULL;
 	wiringSlave = NULL;
@@ -58,8 +59,6 @@ ComponentRosJoystick::ComponentRosJoystick()
 	// initialize members of ComponentRosJoystickROSExtension
 	rosPorts = 0;
 	
-	// initialize members of SeRoNetSDKComponentGeneratorExtension
-	
 	// initialize members of PlainOpcUaComponentRosJoystickExtension
 	
 }
@@ -72,6 +71,11 @@ void ComponentRosJoystick::addPortFactory(const std::string &name, ComponentRosJ
 void ComponentRosJoystick::addExtension(ComponentRosJoystickExtension *extension)
 {
 	componentExtensionRegistry[extension->getName()] = extension;
+}
+
+SmartACE::SmartComponent* ComponentRosJoystick::getComponentImpl()
+{
+	return dynamic_cast<ComponentRosJoystickAcePortFactory*>(portFactoryRegistry["ACE_SmartSoft"])->getComponentImpl();
 }
 
 /**
@@ -144,8 +148,6 @@ void ComponentRosJoystick::init(int argc, char *argv[])
 		
 		// initializations of ComponentRosJoystickROSExtension
 		
-		// initializations of SeRoNetSDKComponentGeneratorExtension
-		
 		// initializations of PlainOpcUaComponentRosJoystickExtension
 		
 		
@@ -216,7 +218,7 @@ void ComponentRosJoystick::init(int argc, char *argv[])
 			if(microseconds > 0) {
 				Smart::TimedTaskTrigger *triggerPtr = new Smart::TimedTaskTrigger();
 				triggerPtr->attach(joystickActivity);
-				component->getTimerManager()->scheduleTimer(triggerPtr, std::chrono::microseconds(microseconds), std::chrono::microseconds(microseconds));
+				component->getTimerManager()->scheduleTimer(triggerPtr, (void *) 0, std::chrono::microseconds(microseconds), std::chrono::microseconds(microseconds));
 				// store trigger in class member
 				joystickActivityTrigger = triggerPtr;
 			} else {
@@ -235,7 +237,7 @@ void ComponentRosJoystick::init(int argc, char *argv[])
 			Smart::TimedTaskTrigger *triggerPtr = new Smart::TimedTaskTrigger();
 			int microseconds = 1000*1000 / 10.0;
 			if(microseconds > 0) {
-				component->getTimerManager()->scheduleTimer(triggerPtr, std::chrono::microseconds(microseconds), std::chrono::microseconds(microseconds));
+				component->getTimerManager()->scheduleTimer(triggerPtr, (void *) 0, std::chrono::microseconds(microseconds), std::chrono::microseconds(microseconds));
 				triggerPtr->attach(joystickActivity);
 				// store trigger in class member
 				joystickActivityTrigger = triggerPtr;
@@ -306,8 +308,10 @@ void ComponentRosJoystick::fini()
 	// destroy all task instances
 	// unlink all UpcallManagers
 	// unlink the TaskTrigger
-	joystickActivityTrigger->detach(joystickActivity);
-	delete joystickActivity;
+	if(joystickActivityTrigger != NULL){
+		joystickActivityTrigger->detach(joystickActivity);
+		delete joystickActivity;
+	}
 
 	// destroy all input-handler
 
@@ -342,8 +346,6 @@ void ComponentRosJoystick::fini()
 	}
 	
 	// destruction of ComponentRosJoystickROSExtension
-	
-	// destruction of SeRoNetSDKComponentGeneratorExtension
 	
 	// destruction of PlainOpcUaComponentRosJoystickExtension
 	
@@ -447,8 +449,6 @@ void ComponentRosJoystick::loadParameter(int argc, char *argv[])
 		}
 		
 		// load parameters for ComponentRosJoystickROSExtension
-		
-		// load parameters for SeRoNetSDKComponentGeneratorExtension
 		
 		// load parameters for PlainOpcUaComponentRosJoystickExtension
 		
