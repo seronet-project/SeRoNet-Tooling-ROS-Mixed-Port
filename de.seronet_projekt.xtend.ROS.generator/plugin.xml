@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="de.seronet_projekt.xtext.component.rosPortExtension.RosPortExtensionGeneratorEP">
+         point="org.xtext.component.componentDefinition.ComponentDefinitionGeneratorEP">
       <generator
             class="de.seronet_projekt.xtend.ROS.generator.ROSGenerator">
       </generator>

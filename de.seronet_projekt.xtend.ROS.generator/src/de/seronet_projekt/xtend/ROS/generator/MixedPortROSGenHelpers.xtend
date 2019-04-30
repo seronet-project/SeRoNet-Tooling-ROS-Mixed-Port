@@ -33,39 +33,64 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 //--------------------------------------------------------------------------
-
 package de.seronet_projekt.xtend.ROS.generator
 
-import org.eclipse.xtext.generator.AbstractGenerator
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.generator.IGeneratorContext
-import com.google.inject.Inject
 import org.ecore.component.componentDefinition.ComponentDefinition
+import org.ecore.component.seronetExtension.MixedPortROS
+import rosInterfacesPool.RosTopic
+import rosInterfacesPool.RosService
+import rosInterfacesPool.RosAction
+import rosInterfacesPool.RosActionClient
+import rosInterfacesPool.RosActionServer
 
-class ROSGeneratorImpl extends AbstractGenerator {
-	@Inject extension ROS_CMake;
-	@Inject extension ROS_package;
-	@Inject extension ROS_ComponentExtension;
-	@Inject extension ROS_Callbacks;
+class MixedPortROSGenHelpers {
+	def Iterable<MixedPortROS> getAllROSPorts(ComponentDefinition comp) {
+		return comp.elements.filter(MixedPortROS).sortBy[name]
+	}
 	
-	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		for(comp: input.allContents.toIterable.filter(ComponentDefinition)) {
-			// generate the callback interface header
-			fsa.generateFile(comp.rosPortCallbacksInterfaceHeaderFile, comp.compileRosPortCallbacksInterfaceHeader)
-			// generate once the callback user-implementation class
-			fsa.generateFile(comp.rosPortCallbacksUserClassHeaderFile, ExtendedOutputConfigurationProvider::SRC_OUTPUT, comp.compileRosPortCallbacksUserClassHeader)
-			fsa.generateFile(comp.rosPortCallbacksUserClassSourceFile, ExtendedOutputConfigurationProvider::SRC_OUTPUT, comp.compileRosPortCallbacksUserClassSource)
-			
-			// generate the Component Extension C++ class
-			fsa.generateFile(comp.rosPortBaseClassHeaderFile, comp.compileRosPortBaseClassHeader)
-			fsa.generateFile(comp.rosPortExtensionHeaderFilename, comp.compileRosPortExtensionHeader)
-			fsa.generateFile(comp.rosPortExtensionSourceFilename, comp.compileRosPortExtensionSource)
-			
-			// generate the CMakeLists.txt
-			fsa.generateFile("CMakeLists.txt", comp.compileRosCMake)
-			fsa.generateFile("package.xml", comp.compileRosPackage)
+	def String getTypeString(MixedPortROS mpr) {
+		val p = mpr.port
+		switch(p) {
+			RosTopic: p.type
+			RosService: p.type
+			RosAction: p.type
 		}
 	}
 	
+	def String getMessageString(MixedPortROS mpr) {
+		val typeString = mpr.typeString
+		val dot_idx = typeString.indexOf('.')
+		if(dot_idx > 0) {
+			return typeString.substring(dot_idx+1)
+		}
+		return typeString
+	}
+	
+	def String getPackageString(MixedPortROS mpr) {
+		val typeString = mpr.typeString
+		val dot_idx = typeString.indexOf('.')
+		if(dot_idx > 0) {
+			return typeString.substring(0, dot_idx)
+		}
+		return typeString
+	}
+	
+	def Iterable<String> getAllPackageStrings(ComponentDefinition comp) {
+		return comp.allROSPorts.map[it.packageString];
+	}
+	
+	def Boolean hasActionClients(ComponentDefinition comp) {
+		return comp.allROSPorts.exists[it.port instanceof RosActionClient]
+	}
+	
+	def Boolean hasActionServers(ComponentDefinition comp) {
+		return comp.allROSPorts.exists[it.port instanceof RosActionServer]
+	}
+	
+	def Boolean isROSAction(MixedPortROS mpr) {
+		return (mpr.port instanceof RosAction) 
+	}
+	def Iterable<MixedPortROS> getROSActions(ComponentDefinition comp) {
+		return comp.allROSPorts.filter[it.isROSAction]
+	}
 }

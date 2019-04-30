@@ -9,6 +9,8 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.ecore.base.mixedport.AbstractMixedPortDefinition;
+import org.ecore.base.mixedport.MixedPortROSBase;
 import rosInterfacesPool.*;
 
 /**
@@ -110,6 +112,14 @@ public class RosInterfacesPoolAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRosAction(RosAction object) {
 				return createRosActionAdapter();
+			}
+			@Override
+			public Adapter caseAbstractMixedPortDefinition(AbstractMixedPortDefinition object) {
+				return createAbstractMixedPortDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseMixedPortROSBase(MixedPortROSBase object) {
+				return createMixedPortROSBaseAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -282,6 +292,34 @@ public class RosInterfacesPoolAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRosActionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.ecore.base.mixedport.AbstractMixedPortDefinition <em>Abstract Mixed Port Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.ecore.base.mixedport.AbstractMixedPortDefinition
+	 * @generated
+	 */
+	public Adapter createAbstractMixedPortDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.ecore.base.mixedport.MixedPortROSBase <em>Mixed Port ROS Base</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.ecore.base.mixedport.MixedPortROSBase
+	 * @generated
+	 */
+	public Adapter createMixedPortROSBaseAdapter() {
 		return null;
 	}
 

@@ -3,25 +3,27 @@ package de.seronet_projekt.xtend.ROS.generator
 import com.google.inject.Inject
 import org.xtend.smartsoft.generator.component.SmartComponentExtension
 import org.xtend.smartsoft.generator.component.SmartComponent
-import static extension de.seronet_projekt.ecore.component.rosPortExtension.RosPortExtensionUtils.*
-import de.seronet_projekt.ecore.component.rosPortExtension.ExtendsComponent
-import de.seronet_projekt.ecore.component.rosPortExtension.RosPortSelection
 import rosInterfacesPool.RosPublisher
 import rosInterfacesPool.RosSubscriber
 import rosInterfacesPool.RosSrvClient
 import rosInterfacesPool.RosSrvServer
+import org.ecore.component.componentDefinition.ComponentDefinition
+import org.ecore.component.seronetExtension.MixedPortROS
+import rosInterfacesPool.RosActionClient
+import rosInterfacesPool.RosActionServer
 
 class ROS_ComponentExtension {
 	@Inject extension CopyrightHelpers
 	@Inject extension SmartComponentExtension
 	@Inject extension SmartComponent
 	@Inject extension ROS_Callbacks
+	@Inject extension MixedPortROSGenHelpers;
 	
-	def String getRosPortBaseClassHeaderFile(ExtendsComponent comp) '''«comp.name»RosPortBaseClass.hh'''
-	def String getRosPortExtensionHeaderFilename(ExtendsComponent component) '''«component.name»RosPortExtension.hh'''
-	def String getRosPortExtensionSourceFilename(ExtendsComponent component) '''«component.name»RosPortExtension.cc'''
+	def String getRosPortBaseClassHeaderFile(ComponentDefinition comp) '''«comp.name»RosPortBaseClass.hh'''
+	def String getRosPortExtensionHeaderFilename(ComponentDefinition component) '''«component.name»RosPortExtension.hh'''
+	def String getRosPortExtensionSourceFilename(ComponentDefinition component) '''«component.name»RosPortExtension.cc'''
 	
-	def compileRosPortBaseClassHeader(ExtendsComponent comp) 
+	def compileRosPortBaseClassHeader(ComponentDefinition comp) 
 	'''
 	«getCopyright()»
 	
@@ -29,13 +31,22 @@ class ROS_ComponentExtension {
 	#define ROS_PORT_BASE_CLASS_H_
 	
 	#include <ros/ros.h>
+	«IF comp.hasActionClients»
+	#include <actionlib/client/simple_action_client.h>
+	«ENDIF»
+	«IF comp.hasActionServers»
+	#include <actionlib/server/simple_action_server.h>
+	«ENDIF»
+	«FOR port: comp.ROSActions»
+	#include <«port.packageString»/«port.messageString».h>
+	«ENDFOR»
 	
 	class «comp.name»RosPortBaseClass {
 	public:
 		«comp.name»RosPortBaseClass() { };
 		virtual ~«comp.name»RosPortBaseClass() { }
 		
-		«FOR port: comp.ports»
+		«FOR port: comp.allROSPorts»
 		«port.rosType» «port.name»;
 		«ENDFOR»
 	};
@@ -43,7 +54,7 @@ class ROS_ComponentExtension {
 	#endif // ROS_PORT_BASE_CLASS_H_
 	'''
 	
-	def compileRosPortExtensionHeader(ExtendsComponent comp)
+	def compileRosPortExtensionHeader(ComponentDefinition comp)
 	'''
 	«getCopyright()»
 	
@@ -53,10 +64,10 @@ class ROS_ComponentExtension {
 	#include "«comp.rosPortBaseClassHeaderFile»"
 	#include "«comp.rosPortCallbacksUserClassHeaderFile»"
 	
-	#include "«comp.component.componentExtensionHeaderFilename»"
+	#include "«comp.componentExtensionHeaderFilename»"
 	
 	// include component's main class
-	#include "«comp.component.compHeaderFilename»"
+	#include "«comp.compHeaderFilename»"
 	
 	class «comp.name»RosPortExtension : public «comp.name»Extension, public «comp.name»RosPortBaseClass
 	{
@@ -74,10 +85,16 @@ class ROS_ComponentExtension {
 		virtual void initialize(«comp.name» *component, int argc, char* argv[]) override;
 		virtual int onStartup() override;
 
-		«FOR port: comp.ports»
-		inline «port.rosType»* get«port.name.toFirstUpper»Ptr() {
-			return &«port.name»;
-		}
+		«FOR port: comp.allROSPorts»
+			«IF port.isROSAction»
+				inline «port.rosType» get«port.name.toFirstUpper»Ptr() {
+					return «port.name»;
+				}
+			«ELSE»
+				inline «port.rosType»* get«port.name.toFirstUpper»Ptr() {
+					return &«port.name»;
+				}
+			«ENDIF»
 		«ENDFOR»
 
 		virtual int onShutdown(const std::chrono::steady_clock::duration &timeoutTime=std::chrono::seconds(2)) override;
@@ -88,7 +105,7 @@ class ROS_ComponentExtension {
 	'''
 	
 	
-	def compileRosPortExtensionSource(ExtendsComponent component)
+	def compileRosPortExtensionSource(ComponentDefinition component)
 	'''
 	«getCopyright()»
 	
@@ -119,7 +136,7 @@ class ROS_ComponentExtension {
 		
 		component->rosPorts = this;
 		
-		«FOR port: component.ports»
+		«FOR port: component.allROSPorts»
 		«port.compilePortCreation»
 		«ENDFOR»
 	}
@@ -143,28 +160,35 @@ class ROS_ComponentExtension {
 	
 	void «component.name»RosPortExtension::destroy()
 	{
+		«FOR actPort: component.ROSActions»
+		delete «actPort.name»;
+		«ENDFOR»
 		delete nh;
 		delete callbacksPtr;
 	}
 	'''
 	
-	def getRosType(RosPortSelection sel) {
-		val port = sel.port
+	def getRosType(MixedPortROS mrp) {
+		val port = mrp.port
 		switch (port) {
 			RosPublisher: '''ros::Publisher'''
 			RosSubscriber: '''ros::Subscriber'''
 			RosSrvClient: '''ros::ServiceClient'''
 			RosSrvServer: '''ros::ServiceServer'''
+			RosActionClient: '''actionlib::SimpleActionClient<«mrp.packageString»::«mrp.messageString»>*'''
+			RosActionServer: '''actionlib::SimpleActionServer<«mrp.packageString»::«mrp.messageString»>*'''
 		}
 	}
 	
-	def compilePortCreation(RosPortSelection sel) {
-		val port = sel.port
+	def compilePortCreation(MixedPortROS mrp) {
+		val port = mrp.port
 		switch (port) {
-			RosPublisher: '''«port.name» = nh->advertise<«sel.packageString»::«sel.messageString»>("«port.topicName»", 10);'''
-			RosSubscriber: '''«port.name» = nh->subscribe("«port.topicName»", 10, &«(sel.eContainer as ExtendsComponent).name»RosPortCallbacks::«sel.name»_cb, callbacksPtr);'''
-			RosSrvClient: '''«port.name» = nh->serviceClient<«sel.packageString»::«sel.messageString»>("«port.srvName»");'''
-			RosSrvServer: '''«port.name» = nh->advertiseService("«port.srvName»", &«(sel.eContainer as ExtendsComponent).name»RosPortCallbacks::«port.name»_cb, callbacksPtr);'''
+			RosPublisher: '''«port.name» = nh->advertise<«mrp.packageString»::«mrp.messageString»>("«port.topicName»", 10);'''
+			RosSubscriber: '''«port.name» = nh->subscribe("«port.topicName»", 10, &«(mrp.eContainer as ComponentDefinition).name»RosPortCallbacks::«mrp.name»_cb, callbacksPtr);'''
+			RosSrvClient: '''«port.name» = nh->serviceClient<«mrp.packageString»::«mrp.messageString»>("«port.srvName»");'''
+			RosSrvServer: '''«port.name» = nh->advertiseService("«port.srvName»", &«(mrp.eContainer as ComponentDefinition).name»RosPortCallbacks::«port.name»_cb, callbacksPtr);'''
+			RosActionClient: '''«port.name» = new actionlib::SimpleActionClient<«mrp.packageString»::«mrp.messageString»>(*nh, "«port.actionName»", true);'''
+			RosActionServer: '''«port.name» = new actionlib::SimpleActionServer<«mrp.packageString»::«mrp.messageString»>(*nh, "«port.actionName»", false);'''
 		}
 	}
 }

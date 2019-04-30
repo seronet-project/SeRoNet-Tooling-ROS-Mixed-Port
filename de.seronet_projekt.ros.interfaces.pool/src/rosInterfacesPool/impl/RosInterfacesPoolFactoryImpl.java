@@ -73,6 +73,7 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosInterfacesPool createRosInterfacesPool() {
 		RosInterfacesPoolImpl rosInterfacesPool = new RosInterfacesPoolImpl();
 		return rosInterfacesPool;
@@ -83,6 +84,7 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosPublisher createRosPublisher() {
 		RosPublisherImpl rosPublisher = new RosPublisherImpl();
 		return rosPublisher;
@@ -93,6 +95,7 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosSubscriber createRosSubscriber() {
 		RosSubscriberImpl rosSubscriber = new RosSubscriberImpl();
 		return rosSubscriber;
@@ -103,6 +106,7 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosSrvServer createRosSrvServer() {
 		RosSrvServerImpl rosSrvServer = new RosSrvServerImpl();
 		return rosSrvServer;
@@ -113,6 +117,7 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosSrvClient createRosSrvClient() {
 		RosSrvClientImpl rosSrvClient = new RosSrvClientImpl();
 		return rosSrvClient;
@@ -123,6 +128,7 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosActionServer createRosActionServer() {
 		RosActionServerImpl rosActionServer = new RosActionServerImpl();
 		return rosActionServer;
@@ -133,6 +139,7 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosActionClient createRosActionClient() {
 		RosActionClientImpl rosActionClient = new RosActionClientImpl();
 		return rosActionClient;
@@ -143,6 +150,7 @@ public class RosInterfacesPoolFactoryImpl extends EFactoryImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosInterfacesPoolPackage getRosInterfacesPoolPackage() {
 		return (RosInterfacesPoolPackage)getEPackage();
 	}

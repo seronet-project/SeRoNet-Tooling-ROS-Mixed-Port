@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.ecore.base.mixedport.MixedportPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -110,7 +111,7 @@ public interface RosInterfacesPoolPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROS_INTERFACE__NAME = 0;
+	int ROS_INTERFACE__NAME = MixedportPackage.MIXED_PORT_ROS_BASE__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Ros Interface</em>' class.
@@ -119,7 +120,7 @@ public interface RosInterfacesPoolPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROS_INTERFACE_FEATURE_COUNT = 1;
+	int ROS_INTERFACE_FEATURE_COUNT = MixedportPackage.MIXED_PORT_ROS_BASE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Ros Interface</em>' class.
@@ -128,7 +129,7 @@ public interface RosInterfacesPoolPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROS_INTERFACE_OPERATION_COUNT = 0;
+	int ROS_INTERFACE_OPERATION_COUNT = MixedportPackage.MIXED_PORT_ROS_BASE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link rosInterfacesPool.impl.RosTopicImpl <em>Ros Topic</em>}' class.
@@ -763,17 +764,6 @@ public interface RosInterfacesPoolPackage extends EPackage {
 	EClass getRosInterface();
 
 	/**
-	 * Returns the meta object for the attribute '{@link rosInterfacesPool.RosInterface#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see rosInterfacesPool.RosInterface#getName()
-	 * @see #getRosInterface()
-	 * @generated
-	 */
-	EAttribute getRosInterface_Name();
-
-	/**
 	 * Returns the meta object for class '{@link rosInterfacesPool.RosActionServer <em>Ros Action Server</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -967,14 +957,6 @@ public interface RosInterfacesPoolPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ROS_INTERFACE = eINSTANCE.getRosInterface();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROS_INTERFACE__NAME = eINSTANCE.getRosInterface_Name();
 
 		/**
 		 * The meta object literal for the '{@link rosInterfacesPool.impl.RosActionServerImpl <em>Ros Action Server</em>}' class.

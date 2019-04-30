@@ -7,6 +7,8 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.ecore.base.mixedport.AbstractMixedPortDefinition;
+import org.ecore.base.mixedport.MixedPortROSBase;
 import rosInterfacesPool.*;
 
 /**
@@ -76,6 +78,8 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				RosTopic rosTopic = (RosTopic)theEObject;
 				T result = caseRosTopic(rosTopic);
 				if (result == null) result = caseRosInterface(rosTopic);
+				if (result == null) result = caseMixedPortROSBase(rosTopic);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosTopic);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -83,6 +87,8 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				RosService rosService = (RosService)theEObject;
 				T result = caseRosService(rosService);
 				if (result == null) result = caseRosInterface(rosService);
+				if (result == null) result = caseMixedPortROSBase(rosService);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosService);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -91,6 +97,8 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				T result = caseRosPublisher(rosPublisher);
 				if (result == null) result = caseRosTopic(rosPublisher);
 				if (result == null) result = caseRosInterface(rosPublisher);
+				if (result == null) result = caseMixedPortROSBase(rosPublisher);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosPublisher);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -99,6 +107,8 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				T result = caseRosSubscriber(rosSubscriber);
 				if (result == null) result = caseRosTopic(rosSubscriber);
 				if (result == null) result = caseRosInterface(rosSubscriber);
+				if (result == null) result = caseMixedPortROSBase(rosSubscriber);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosSubscriber);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -107,6 +117,8 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				T result = caseRosSrvServer(rosSrvServer);
 				if (result == null) result = caseRosService(rosSrvServer);
 				if (result == null) result = caseRosInterface(rosSrvServer);
+				if (result == null) result = caseMixedPortROSBase(rosSrvServer);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosSrvServer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -115,12 +127,16 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				T result = caseRosSrvClient(rosSrvClient);
 				if (result == null) result = caseRosService(rosSrvClient);
 				if (result == null) result = caseRosInterface(rosSrvClient);
+				if (result == null) result = caseMixedPortROSBase(rosSrvClient);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosSrvClient);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case RosInterfacesPoolPackage.ROS_INTERFACE: {
 				RosInterface rosInterface = (RosInterface)theEObject;
 				T result = caseRosInterface(rosInterface);
+				if (result == null) result = caseMixedPortROSBase(rosInterface);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosInterface);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -129,6 +145,8 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				T result = caseRosActionServer(rosActionServer);
 				if (result == null) result = caseRosAction(rosActionServer);
 				if (result == null) result = caseRosInterface(rosActionServer);
+				if (result == null) result = caseMixedPortROSBase(rosActionServer);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosActionServer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -137,6 +155,8 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				T result = caseRosActionClient(rosActionClient);
 				if (result == null) result = caseRosAction(rosActionClient);
 				if (result == null) result = caseRosInterface(rosActionClient);
+				if (result == null) result = caseMixedPortROSBase(rosActionClient);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosActionClient);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -144,6 +164,8 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 				RosAction rosAction = (RosAction)theEObject;
 				T result = caseRosAction(rosAction);
 				if (result == null) result = caseRosInterface(rosAction);
+				if (result == null) result = caseMixedPortROSBase(rosAction);
+				if (result == null) result = caseAbstractMixedPortDefinition(rosAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -313,6 +335,36 @@ public class RosInterfacesPoolSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRosAction(RosAction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Mixed Port Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Mixed Port Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractMixedPortDefinition(AbstractMixedPortDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mixed Port ROS Base</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mixed Port ROS Base</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMixedPortROSBase(MixedPortROSBase object) {
 		return null;
 	}
 

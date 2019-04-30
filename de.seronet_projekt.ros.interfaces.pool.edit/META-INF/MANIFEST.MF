@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: de.seronet_projekt.ros.interfaces.pool.edit;singleton:=true
+Automatic-Module-Name: de.seronet_projekt.ros.interfaces.pool.edit
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: rosInterfacesPool.provider.RosInterfacesPoolEditPlugin$Implementation
@@ -11,5 +12,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: rosInterfacesPool.provider
 Require-Bundle: org.eclipse.core.runtime,
  de.seronet_projekt.ros.interfaces.pool;visibility:=reexport,
- org.eclipse.emf.edit;visibility:=reexport
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.ecore.base.mixedport;visibility:=reexport,
+ org.ecore.base.mixedport.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy

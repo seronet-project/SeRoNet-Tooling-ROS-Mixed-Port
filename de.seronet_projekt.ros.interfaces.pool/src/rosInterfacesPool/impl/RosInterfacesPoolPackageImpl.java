@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.ecore.base.mixedport.MixedportPackage;
 import rosInterfacesPool.RosAction;
 import rosInterfacesPool.RosActionClient;
 import rosInterfacesPool.RosActionServer;
@@ -135,7 +136,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link RosInterfacesPoolPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -149,9 +150,13 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 		if (isInited) return (RosInterfacesPoolPackage)EPackage.Registry.INSTANCE.getEPackage(RosInterfacesPoolPackage.eNS_URI);
 
 		// Obtain or create and register package
-		RosInterfacesPoolPackageImpl theRosInterfacesPoolPackage = (RosInterfacesPoolPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RosInterfacesPoolPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RosInterfacesPoolPackageImpl());
+		Object registeredRosInterfacesPoolPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		RosInterfacesPoolPackageImpl theRosInterfacesPoolPackage = registeredRosInterfacesPoolPackage instanceof RosInterfacesPoolPackageImpl ? (RosInterfacesPoolPackageImpl)registeredRosInterfacesPoolPackage : new RosInterfacesPoolPackageImpl();
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		MixedportPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theRosInterfacesPoolPackage.createPackageContents();
@@ -162,7 +167,6 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 		// Mark meta-data to indicate it can't be changed
 		theRosInterfacesPoolPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(RosInterfacesPoolPackage.eNS_URI, theRosInterfacesPoolPackage);
 		return theRosInterfacesPoolPackage;
@@ -173,6 +177,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosInterfacesPool() {
 		return rosInterfacesPoolEClass;
 	}
@@ -182,6 +187,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRosInterfacesPool_Interfaces() {
 		return (EReference)rosInterfacesPoolEClass.getEStructuralFeatures().get(0);
 	}
@@ -191,6 +197,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosTopic() {
 		return rosTopicEClass;
 	}
@@ -200,6 +207,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRosTopic_TopicName() {
 		return (EAttribute)rosTopicEClass.getEStructuralFeatures().get(0);
 	}
@@ -209,6 +217,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRosTopic_Type() {
 		return (EAttribute)rosTopicEClass.getEStructuralFeatures().get(1);
 	}
@@ -218,6 +227,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosService() {
 		return rosServiceEClass;
 	}
@@ -227,6 +237,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRosService_SrvName() {
 		return (EAttribute)rosServiceEClass.getEStructuralFeatures().get(0);
 	}
@@ -236,6 +247,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRosService_Type() {
 		return (EAttribute)rosServiceEClass.getEStructuralFeatures().get(1);
 	}
@@ -245,6 +257,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosPublisher() {
 		return rosPublisherEClass;
 	}
@@ -254,6 +267,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosSubscriber() {
 		return rosSubscriberEClass;
 	}
@@ -263,6 +277,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosSrvServer() {
 		return rosSrvServerEClass;
 	}
@@ -272,6 +287,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosSrvClient() {
 		return rosSrvClientEClass;
 	}
@@ -281,6 +297,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosInterface() {
 		return rosInterfaceEClass;
 	}
@@ -290,15 +307,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRosInterface_Name() {
-		return (EAttribute)rosInterfaceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public EClass getRosActionServer() {
 		return rosActionServerEClass;
 	}
@@ -308,6 +317,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosActionClient() {
 		return rosActionClientEClass;
 	}
@@ -317,6 +327,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRosAction() {
 		return rosActionEClass;
 	}
@@ -326,6 +337,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRosAction_ActionName() {
 		return (EAttribute)rosActionEClass.getEStructuralFeatures().get(0);
 	}
@@ -335,6 +347,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRosAction_Type() {
 		return (EAttribute)rosActionEClass.getEStructuralFeatures().get(1);
 	}
@@ -344,6 +357,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RosInterfacesPoolFactory getRosInterfacesPoolFactory() {
 		return (RosInterfacesPoolFactory)getEFactoryInstance();
 	}
@@ -387,7 +401,6 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 		rosSrvClientEClass = createEClass(ROS_SRV_CLIENT);
 
 		rosInterfaceEClass = createEClass(ROS_INTERFACE);
-		createEAttribute(rosInterfaceEClass, ROS_INTERFACE__NAME);
 
 		rosActionServerEClass = createEClass(ROS_ACTION_SERVER);
 
@@ -421,6 +434,9 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		MixedportPackage theMixedportPackage = (MixedportPackage)EPackage.Registry.INSTANCE.getEPackage(MixedportPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -432,6 +448,7 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 		rosSubscriberEClass.getESuperTypes().add(this.getRosTopic());
 		rosSrvServerEClass.getESuperTypes().add(this.getRosService());
 		rosSrvClientEClass.getESuperTypes().add(this.getRosService());
+		rosInterfaceEClass.getESuperTypes().add(theMixedportPackage.getMixedPortROSBase());
 		rosActionServerEClass.getESuperTypes().add(this.getRosAction());
 		rosActionClientEClass.getESuperTypes().add(this.getRosAction());
 		rosActionEClass.getESuperTypes().add(this.getRosInterface());
@@ -457,7 +474,6 @@ public class RosInterfacesPoolPackageImpl extends EPackageImpl implements RosInt
 		initEClass(rosSrvClientEClass, RosSrvClient.class, "RosSrvClient", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(rosInterfaceEClass, RosInterface.class, "RosInterface", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRosInterface_Name(), ecorePackage.getEString(), "name", null, 1, 1, RosInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(rosActionServerEClass, RosActionServer.class, "RosActionServer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

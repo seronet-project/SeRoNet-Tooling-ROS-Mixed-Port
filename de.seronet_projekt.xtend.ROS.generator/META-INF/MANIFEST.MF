@@ -17,6 +17,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext,
  de.seronet_projekt.ros.interfaces.pool,
  org.xtend.smartsoft.generator,
- de.seronet_projekt.ecore.component.rosPortExtension,
- de.seronet_projekt.xtext.component.rosPortExtension
+ org.ecore.component.componentDefinition,
+ org.xtext.component.componentDefinition,
+ org.ecore.component.seronetExtension
 Bundle-Vendor: SeRoNet (www.seronet-projekt.de)

@@ -90,6 +90,7 @@ public abstract class RosTopicImpl extends RosInterfaceImpl implements RosTopic 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTopicName() {
 		return topicName;
 	}
@@ -99,6 +100,7 @@ public abstract class RosTopicImpl extends RosInterfaceImpl implements RosTopic 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTopicName(String newTopicName) {
 		String oldTopicName = topicName;
 		topicName = newTopicName;
@@ -111,6 +113,7 @@ public abstract class RosTopicImpl extends RosInterfaceImpl implements RosTopic 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -120,6 +123,7 @@ public abstract class RosTopicImpl extends RosInterfaceImpl implements RosTopic 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(String newType) {
 		String oldType = type;
 		type = newType;
@@ -204,7 +208,7 @@ public abstract class RosTopicImpl extends RosInterfaceImpl implements RosTopic 
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (topicName: ");
 		result.append(topicName);
 		result.append(", type: ");

@@ -1,16 +1,15 @@
 package de.seronet_projekt.xtend.ROS.generator
 
 import com.google.inject.Inject
-import de.seronet_projekt.ecore.component.rosPortExtension.ExtendsComponent
-import static extension de.seronet_projekt.ecore.component.rosPortExtension.RosPortExtensionUtils.*
-
+import org.ecore.component.componentDefinition.ComponentDefinition
 
 class ROS_CMake {
 	@Inject extension CopyrightHelpers;
 	@Inject extension ROS_ComponentExtension;
 	@Inject extension ROS_Callbacks;
+	@Inject extension MixedPortROSGenHelpers;
 	
-	def compileRosCMake(ExtendsComponent comp) 
+	def compileRosCMake(ComponentDefinition comp) 
 	'''
 	«copyrightHash»
 	# %Tag(FULLTEXT)%
