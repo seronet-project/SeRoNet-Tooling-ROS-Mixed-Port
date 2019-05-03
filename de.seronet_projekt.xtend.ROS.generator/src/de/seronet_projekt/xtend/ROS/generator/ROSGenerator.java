@@ -36,10 +36,14 @@
 
 package de.seronet_projekt.xtend.ROS.generator;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.ecore.component.componentDefinition.AbstractComponentElement;
+import org.ecore.component.componentDefinition.ComponentDefinition;
+import org.ecore.component.seronetExtension.MixedPortROS;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -55,16 +59,30 @@ public class ROSGenerator extends AbstractGenerator {
 
 		// use the generator-helper class
 		GeneratorHelper genHelper = new GeneratorHelper(injector,resource);
+		
+		boolean hasRosPorts = false;
+		for(EObject obj: resource.getContents()) {
+			if(obj instanceof ComponentDefinition) {
+				ComponentDefinition comp = (ComponentDefinition)obj;
+				for(AbstractComponentElement elem: comp.getElements()) {
+					if(elem instanceof MixedPortROS) {
+						hasRosPorts = true;
+					}
+				}
+			}
+		}
 	
-		genHelper.createFolder(ExtendedOutputConfigurationProvider.ROS_OUTPUT);
-		
-		// clean-up the "SeRoNetSDK/src-gen" directory
-		genHelper.invokeDirectoryCleaner(IFileSystemAccess2.DEFAULT_OUTPUT);
-		
-		// execute generator using a configured FileSystemAccess
-		gen.doGenerate(resource, genHelper.getConfiguredFileSystemAccess(), context);
-		
-		// refresh the source-folder (and its subfolders down to depth 3) for making changes visible
-		genHelper.refreshFolder(ExtendedOutputConfigurationProvider.ROS_OUTPUT, 2);
+		if(hasRosPorts == true) {
+			genHelper.createFolder(ExtendedOutputConfigurationProvider.ROS_OUTPUT);
+			
+			// clean-up the "SeRoNetSDK/src-gen" directory
+			genHelper.invokeDirectoryCleaner(IFileSystemAccess2.DEFAULT_OUTPUT);
+			
+			// execute generator using a configured FileSystemAccess
+			gen.doGenerate(resource, genHelper.getConfiguredFileSystemAccess(), context);
+			
+			// refresh the source-folder (and its subfolders down to depth 3) for making changes visible
+			genHelper.refreshFolder(ExtendedOutputConfigurationProvider.ROS_OUTPUT, 2);
+		}
 	}
 }
