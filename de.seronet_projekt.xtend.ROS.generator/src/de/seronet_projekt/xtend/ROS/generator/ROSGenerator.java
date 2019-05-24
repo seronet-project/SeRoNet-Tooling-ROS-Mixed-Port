@@ -62,11 +62,13 @@ public class ROSGenerator extends AbstractGenerator {
 		
 		boolean hasRosPorts = false;
 		for(EObject obj: resource.getContents()) {
-			if(obj instanceof ComponentDefinition) {
-				ComponentDefinition comp = (ComponentDefinition)obj;
-				for(AbstractComponentElement elem: comp.getElements()) {
-					if(elem instanceof MixedPortROS) {
-						hasRosPorts = true;
+			for(EObject objcont: obj.eContents()) {
+				if(objcont instanceof ComponentDefinition) {
+					ComponentDefinition comp = (ComponentDefinition)objcont;
+					for(AbstractComponentElement elem: comp.getElements()) {
+						if(elem instanceof MixedPortROS) {
+							hasRosPorts = true;
+						}
 					}
 				}
 			}
