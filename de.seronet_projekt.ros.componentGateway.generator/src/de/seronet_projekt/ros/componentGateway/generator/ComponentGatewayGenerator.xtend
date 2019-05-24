@@ -42,22 +42,22 @@ class ComponentGatewayGenerator extends AbstractGenerator {
 	'''
 RosInterfacesPool {
 	«FOR pub:componentinterface.rospublisher»
-	RosSubscriber «checkname(pub.name)» { topicName "«pub.name»" type "«pub.publisher.message.package.name».«pub.publisher.message.name»" }
+	RosSubscriber «checkname(pub.name)»_sub { topicName "«pub.name»" type "«pub.publisher.message.package.name».«pub.publisher.message.name»" }
 	«ENDFOR»
 	«FOR sub:componentinterface.rossubscriber»
-	RosPublisher «checkname(sub.name)» { topicName "«sub.name»" type "«sub.subscriber.message.package.name».«sub.subscriber.message.name»" }
+	RosPublisher «checkname(sub.name)»_pub { topicName "«sub.name»" type "«sub.subscriber.message.package.name».«sub.subscriber.message.name»" }
 	«ENDFOR»
 	«FOR srvserver:componentinterface.rosserviceserver»
-	RosSrvServer «checkname(srvserver.name)» { srvName "«srvserver.name»" type "«srvserver.srvserver.service.package.name».«srvserver.srvserver.service.name»" }
+	RosSrvServer «checkname(srvserver.name)»_srvser { srvName "«srvserver.name»" type "«srvserver.srvserver.service.package.name».«srvserver.srvserver.service.name»" }
 	«ENDFOR»
 	«FOR srvclient:componentinterface.rosserviceclient»
-	RosSrvClient «checkname(srvclient.name)» { srvName "«srvclient.name»" type "«srvclient.srvclient.service.package.name».«srvclient.srvclient.service.name»" }
+	RosSrvClient «checkname(srvclient.name)»_srvcli { srvName "«srvclient.name»" type "«srvclient.srvclient.service.package.name».«srvclient.srvclient.service.name»" }
 	«ENDFOR»
 	«FOR actionserver:componentinterface.rosactionserver»
-	RosActionServer «checkname(actionserver.name)» { actionName "«actionserver.name»" type "«actionserver.actserver.action.package.name».«actionserver.actserver.action.name»" }
+	RosActionServer «checkname(actionserver.name)»_actser { actionName "«actionserver.name»" type "«actionserver.actserver.action.package.name».«actionserver.actserver.action.name»" }
 	«ENDFOR»
 	«FOR actionclient:componentinterface.rosactionclient»
-	RosActionClient «checkname(actionclient.name)» { actionName "«actionclient.name»" type "«actionclient.actclient.action.package.name».«actionclient.actclient.action.name»" }
+	RosActionClient «checkname(actionclient.name)»_actcli { actionName "«actionclient.name»" type "«actionclient.actclient.action.package.name».«actionclient.actclient.action.name»" }
 	«ENDFOR»
 }
 	'''

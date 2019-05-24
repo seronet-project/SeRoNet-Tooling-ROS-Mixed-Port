@@ -90,6 +90,7 @@ public abstract class RosActionImpl extends RosInterfaceImpl implements RosActio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getActionName() {
 		return actionName;
 	}
@@ -99,6 +100,7 @@ public abstract class RosActionImpl extends RosInterfaceImpl implements RosActio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setActionName(String newActionName) {
 		String oldActionName = actionName;
 		actionName = newActionName;
@@ -111,6 +113,7 @@ public abstract class RosActionImpl extends RosInterfaceImpl implements RosActio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -120,6 +123,7 @@ public abstract class RosActionImpl extends RosInterfaceImpl implements RosActio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(String newType) {
 		String oldType = type;
 		type = newType;
@@ -204,7 +208,7 @@ public abstract class RosActionImpl extends RosInterfaceImpl implements RosActio
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (actionName: ");
 		result.append(actionName);
 		result.append(", type: ");

@@ -32,8 +32,6 @@ class ComponentRosJoystickExtension;
 // includes for ComponentRosJoystickROSExtension
 #include "ComponentRosJoystickRosPortBaseClass.hh"
 
-// includes for SeRoNetSDKComponentGeneratorExtension
-
 // includes for PlainOpcUaComponentRosJoystickExtension
 // include plain OPC UA device clients
 // include plain OPC UA status servers
@@ -108,8 +106,6 @@ public:
 	// definitions of ComponentRosJoystickROSExtension
 	ComponentRosJoystickRosPortBaseClass *rosPorts;
 	
-	// definitions of SeRoNetSDKComponentGeneratorExtension
-	
 	// definitions of PlainOpcUaComponentRosJoystickExtension
 	
 	
@@ -121,6 +117,8 @@ public:
 	
 	/// this method is used to register different PortFactory classes (one for each supported middleware framework)
 	void addPortFactory(const std::string &name, ComponentRosJoystickPortFactoryInterface *portFactory);
+	
+	SmartACE::SmartComponent* getComponentImpl();
 	
 	/// this method is used to register different component-extension classes
 	void addExtension(ComponentRosJoystickExtension *extension);
@@ -214,8 +212,6 @@ public:
 		//--- client port parameter ---
 		
 		// -- parameters for ComponentRosJoystickROSExtension
-		
-		// -- parameters for SeRoNetSDKComponentGeneratorExtension
 		
 		// -- parameters for PlainOpcUaComponentRosJoystickExtension
 		

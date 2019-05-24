@@ -5,6 +5,7 @@ package rosInterfacesPool.provider;
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.ecore.base.mixedport.provider.MixedportEditPlugin;
 
 /**
  * This is the central singleton for the RosInterfacesPool edit plugin.
@@ -38,6 +39,7 @@ public final class RosInterfacesPoolEditPlugin extends EMFPlugin {
 	public RosInterfacesPoolEditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     MixedportEditPlugin.INSTANCE,
 		   });
 	}
 

@@ -41,7 +41,8 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import com.google.inject.Inject
-import de.seronet_projekt.ecore.component.rosPortExtension.ExtendsComponent
+import org.ecore.component.componentDefinition.ComponentDefinition
+import org.ecore.component.seronetExtension.MixedPortROS
 
 class ROSGeneratorImpl extends AbstractGenerator {
 	@Inject extension ROS_CMake;
@@ -50,21 +51,23 @@ class ROSGeneratorImpl extends AbstractGenerator {
 	@Inject extension ROS_Callbacks;
 	
 	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		for(comp: input.allContents.toIterable.filter(ExtendsComponent)) {
-			// generate the callback interface header
-			fsa.generateFile(comp.rosPortCallbacksInterfaceHeaderFile, comp.compileRosPortCallbacksInterfaceHeader)
-			// generate once the callback user-implementation class
-			fsa.generateFile(comp.rosPortCallbacksUserClassHeaderFile, ExtendedOutputConfigurationProvider::SRC_OUTPUT, comp.compileRosPortCallbacksUserClassHeader)
-			fsa.generateFile(comp.rosPortCallbacksUserClassSourceFile, ExtendedOutputConfigurationProvider::SRC_OUTPUT, comp.compileRosPortCallbacksUserClassSource)
-			
-			// generate the Component Extension C++ class
-			fsa.generateFile(comp.rosPortBaseClassHeaderFile, comp.compileRosPortBaseClassHeader)
-			fsa.generateFile(comp.rosPortExtensionHeaderFilename, comp.compileRosPortExtensionHeader)
-			fsa.generateFile(comp.rosPortExtensionSourceFilename, comp.compileRosPortExtensionSource)
-			
-			// generate the CMakeLists.txt
-			fsa.generateFile("CMakeLists.txt", comp.compileRosCMake)
-			fsa.generateFile("package.xml", comp.compileRosPackage)
+		for(comp: input.allContents.toIterable.filter(ComponentDefinition)) {
+			if(comp.elements.exists[it instanceof MixedPortROS]) {
+				// generate the callback interface header
+				fsa.generateFile(comp.rosPortCallbacksInterfaceHeaderFile, comp.compileRosPortCallbacksInterfaceHeader)
+				// generate once the callback user-implementation class
+				fsa.generateFile(comp.rosPortCallbacksUserClassHeaderFile, ExtendedOutputConfigurationProvider::SRC_OUTPUT, comp.compileRosPortCallbacksUserClassHeader)
+				fsa.generateFile(comp.rosPortCallbacksUserClassSourceFile, ExtendedOutputConfigurationProvider::SRC_OUTPUT, comp.compileRosPortCallbacksUserClassSource)
+				
+				// generate the Component Extension C++ class
+				fsa.generateFile(comp.rosPortBaseClassHeaderFile, comp.compileRosPortBaseClassHeader)
+				fsa.generateFile(comp.rosPortExtensionHeaderFilename, comp.compileRosPortExtensionHeader)
+				fsa.generateFile(comp.rosPortExtensionSourceFilename, comp.compileRosPortExtensionSource)
+				
+				// generate the CMakeLists.txt
+				fsa.generateFile("CMakeLists.txt", comp.compileRosCMake)
+				fsa.generateFile("package.xml", comp.compileRosPackage)
+			}
 		}
 	}
 	

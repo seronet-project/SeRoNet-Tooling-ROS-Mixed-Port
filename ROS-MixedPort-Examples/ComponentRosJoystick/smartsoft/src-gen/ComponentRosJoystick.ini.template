@@ -66,9 +66,6 @@ roboticMiddleware ACE_SmartSoft
 ## parameters of ComponentRosJoystickROSExtension
 
 ##########################
-## parameters of SeRoNetSDKComponentGeneratorExtension
-
-##########################
 ## parameters of PlainOpcUaComponentRosJoystickExtension
 
 

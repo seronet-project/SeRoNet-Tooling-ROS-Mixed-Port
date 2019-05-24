@@ -33,56 +33,64 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 //--------------------------------------------------------------------------
+package de.seronet_projekt.xtend.ROS.generator
 
-package de.seronet_projekt.xtend.ROS.generator;
+import org.ecore.component.componentDefinition.ComponentDefinition
+import org.ecore.component.seronetExtension.MixedPortROS
+import rosInterfacesPool.RosTopic
+import rosInterfacesPool.RosService
+import rosInterfacesPool.RosAction
+import rosInterfacesPool.RosActionClient
+import rosInterfacesPool.RosActionServer
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.generator.AbstractGenerator;
-import org.eclipse.xtext.generator.IFileSystemAccess2;
-import org.eclipse.xtext.generator.IGeneratorContext;
-import org.ecore.component.componentDefinition.AbstractComponentElement;
-import org.ecore.component.componentDefinition.ComponentDefinition;
-import org.ecore.component.seronetExtension.MixedPortROS;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-public class ROSGenerator extends AbstractGenerator {
-
-	@Override
-	public void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) 
-	{
-		// use google Guice to resolve all injected Xtend classes!
-		Injector injector = Guice.createInjector(new ROSGeneratorModule());
-		ROSGeneratorImpl gen = injector.getInstance(ROSGeneratorImpl.class);
-
-		// use the generator-helper class
-		GeneratorHelper genHelper = new GeneratorHelper(injector,resource);
-		
-		boolean hasRosPorts = false;
-		for(EObject obj: resource.getContents()) {
-			if(obj instanceof ComponentDefinition) {
-				ComponentDefinition comp = (ComponentDefinition)obj;
-				for(AbstractComponentElement elem: comp.getElements()) {
-					if(elem instanceof MixedPortROS) {
-						hasRosPorts = true;
-					}
-				}
-			}
-		}
+class MixedPortROSGenHelpers {
+	def Iterable<MixedPortROS> getAllROSPorts(ComponentDefinition comp) {
+		return comp.elements.filter(MixedPortROS).sortBy[name]
+	}
 	
-		if(hasRosPorts == true) {
-			genHelper.createFolder(ExtendedOutputConfigurationProvider.ROS_OUTPUT);
-			
-			// clean-up the "SeRoNetSDK/src-gen" directory
-			genHelper.invokeDirectoryCleaner(IFileSystemAccess2.DEFAULT_OUTPUT);
-			
-			// execute generator using a configured FileSystemAccess
-			gen.doGenerate(resource, genHelper.getConfiguredFileSystemAccess(), context);
-			
-			// refresh the source-folder (and its subfolders down to depth 3) for making changes visible
-			genHelper.refreshFolder(ExtendedOutputConfigurationProvider.ROS_OUTPUT, 2);
+	def String getTypeString(MixedPortROS mpr) {
+		val p = mpr.port
+		switch(p) {
+			RosTopic: p.type
+			RosService: p.type
+			RosAction: p.type
 		}
+	}
+	
+	def String getMessageString(MixedPortROS mpr) {
+		val typeString = mpr.typeString
+		val dot_idx = typeString.indexOf('.')
+		if(dot_idx > 0) {
+			return typeString.substring(dot_idx+1)
+		}
+		return typeString
+	}
+	
+	def String getPackageString(MixedPortROS mpr) {
+		val typeString = mpr.typeString
+		val dot_idx = typeString.indexOf('.')
+		if(dot_idx > 0) {
+			return typeString.substring(0, dot_idx)
+		}
+		return typeString
+	}
+	
+	def Iterable<String> getAllPackageStrings(ComponentDefinition comp) {
+		return comp.allROSPorts.map[it.packageString];
+	}
+	
+	def Boolean hasActionClients(ComponentDefinition comp) {
+		return comp.allROSPorts.exists[it.port instanceof RosActionClient]
+	}
+	
+	def Boolean hasActionServers(ComponentDefinition comp) {
+		return comp.allROSPorts.exists[it.port instanceof RosActionServer]
+	}
+	
+	def Boolean isROSAction(MixedPortROS mpr) {
+		return (mpr.port instanceof RosAction) 
+	}
+	def Iterable<MixedPortROS> getROSActions(ComponentDefinition comp) {
+		return comp.allROSPorts.filter[it.isROSAction]
 	}
 }

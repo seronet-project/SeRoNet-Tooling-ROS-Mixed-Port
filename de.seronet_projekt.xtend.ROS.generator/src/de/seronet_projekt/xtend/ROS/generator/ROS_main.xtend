@@ -1,36 +1,44 @@
 package de.seronet_projekt.xtend.ROS.generator
 
 import com.google.inject.Inject
-import de.seronet_projekt.ecore.component.rosPortExtension.ExtendsComponent
-import static extension de.seronet_projekt.ecore.component.rosPortExtension.RosPortExtensionUtils.*
 import rosInterfacesPool.RosSrvClient
 import rosInterfacesPool.RosPublisher
 import rosInterfacesPool.RosSubscriber
-import de.seronet_projekt.ecore.component.rosPortExtension.RosPortSelection
 import rosInterfacesPool.RosSrvServer
+import org.ecore.component.seronetExtension.MixedPortROS
+import org.ecore.component.componentDefinition.ComponentDefinition
+import rosInterfacesPool.RosActionClient
+import rosInterfacesPool.RosActionServer
 
 class ROS_main {
 	@Inject extension CopyrightHelpers;
+	@Inject extension MixedPortROSGenHelpers;
 	
-	def getRosMainFilename(ExtendsComponent comp) { comp.component.name+".cpp" }
+	def getRosMainFilename(ComponentDefinition comp) { comp.name+".cpp" }
 	
-	def compileRosMain(ExtendsComponent comp) 
+	def compileRosMain(ComponentDefinition comp) 
 	'''
 		«copyright»
 		
 		#include <ros/ros.h>
-		«FOR port: comp.ports»
+		«IF comp.hasActionClients»
+		#include <actionlib/client/simple_action_client.h>
+		«ENDIF»
+		«IF comp.hasActionServers»
+		#include <actionlib/server/simple_action_server.h>
+		«ENDIF»
+		«FOR port: comp.allROSPorts»
 		#include <«port.packageString»/«port.messageString».h>
 		«ENDFOR»
 		
-		«FOR srvClient: comp.ports.filter[it.port instanceof RosSrvServer]»
+		«FOR srvClient: comp.allROSPorts.filter[it.port instanceof RosSrvServer]»
 			bool  «srvClient.name»_cb («srvClient.packageString»::«srvClient.messageString»::Request &req, «srvClient.packageString»::«srvClient.messageString»::Response &res){
 			  return true;
 			}
 			
 		«ENDFOR»
 		
-		«FOR pub: comp.ports.filter[it.port instanceof RosSubscriber]»
+		«FOR pub: comp.allROSPorts.filter[it.port instanceof RosSubscriber]»
 			void  «pub.name»_cb (const «pub.packageString»::«pub.messageString»::ConstPtr &msg) {
 				
 			}
@@ -42,7 +50,7 @@ class ROS_main {
 			ros::init(argc, argv, "ros_gateway");
 			ros::NodeHandle n;
 			
-			«FOR port: comp.ports»
+			«FOR port: comp.allROSPorts»
 				«port.compilePortSelection»
 			«ENDFOR»
 			
@@ -52,13 +60,15 @@ class ROS_main {
 		}
 	'''
 	
-	def compilePortSelection(RosPortSelection sel) {
-		val port = sel.port
+	def compilePortSelection(MixedPortROS mrp) {
+		val port = mrp.port
 		switch (port) {
-			RosPublisher: '''ros::Publisher «port.name»_pub = n.advertise<«sel.packageString»::«sel.messageString»>("«port.topicName»", 10);'''
-			RosSubscriber: '''ros::Subscriber «port.name»_sub = n.subscribe("«port.topicName»", 10, «sel.name»_cb);'''
-			RosSrvClient: '''ros::ServiceClient «port.name» = n.serviceClient<«sel.packageString»::«sel.messageString»>("«port.srvName»");'''
+			RosPublisher: '''ros::Publisher «port.name»_pub = n.advertise<«mrp.packageString»::«mrp.messageString»>("«port.topicName»", 10);'''
+			RosSubscriber: '''ros::Subscriber «port.name»_sub = n.subscribe("«port.topicName»", 10, «mrp.name»_cb);'''
+			RosSrvClient: '''ros::ServiceClient «port.name» = n.serviceClient<«mrp.packageString»::«mrp.messageString»>("«port.srvName»");'''
 			RosSrvServer: '''ros::ServiceServer «port.name» = n.advertiseService("«port.srvName»", «port.name»_cb);'''
+			RosActionClient: '''actionlib::SimpleActionClient<«mrp.packageString»::«mrp.messageString»> «port.name»_client(n, "«port.name»", true);'''
+			RosActionServer: '''actionlib::SimpleActionServer<«mrp.packageString»::«mrp.messageString»> «port.name»_server(n, "«port.name»", false);'''
 		}
 	}
 }

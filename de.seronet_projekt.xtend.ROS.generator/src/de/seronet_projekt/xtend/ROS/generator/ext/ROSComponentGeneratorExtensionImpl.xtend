@@ -2,8 +2,7 @@ package de.seronet_projekt.xtend.ROS.generator.ext
 
 import org.xtend.smartsoft.generator.component.ComponentGeneratorExtension
 import org.ecore.component.componentDefinition.ComponentDefinition
-import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.runtime.Path
+import org.ecore.component.seronetExtension.MixedPortROS
 
 class ROSComponentGeneratorExtensionImpl implements ComponentGeneratorExtension {
 	override getExtensionName(ComponentDefinition component) {
@@ -11,16 +10,7 @@ class ROSComponentGeneratorExtensionImpl implements ComponentGeneratorExtension 
 	}
 	
 	def Boolean hasRosPortSelection(ComponentDefinition component) {
-		val compModelUri = component.eResource.URI.trimFileExtension
-		val rosPortSelectionModelURI = compModelUri.appendFileExtension("componentRosPorts")
-		var String pathString = "";
-		for(var i=1; i<rosPortSelectionModelURI.segmentCount; i=i+1) {
-			pathString = pathString + "/" + rosPortSelectionModelURI.segment(i)
-		}
-		val root = ResourcesPlugin.getWorkspace().root;
-		val path = new Path(pathString);
-		// check if the model file exists
-		return root.exists(path)
+		return component.elements.exists[it instanceof MixedPortROS];
 	}
 	
 	override getHeaderIncludes(ComponentDefinition component)

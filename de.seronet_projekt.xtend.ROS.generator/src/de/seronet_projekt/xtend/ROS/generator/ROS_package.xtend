@@ -1,10 +1,12 @@
 package de.seronet_projekt.xtend.ROS.generator
 
-import de.seronet_projekt.ecore.component.rosPortExtension.ExtendsComponent
-import static extension de.seronet_projekt.ecore.component.rosPortExtension.RosPortExtensionUtils.*
+import org.ecore.component.componentDefinition.ComponentDefinition
+import com.google.inject.Inject
 
 class ROS_package {
-	def compileRosPackage(ExtendsComponent comp) 
+	@Inject extension MixedPortROSGenHelpers;
+	
+	def compileRosPackage(ComponentDefinition comp) 
 	'''
 	<?xml version="1.0"?>
 	<package format="2">

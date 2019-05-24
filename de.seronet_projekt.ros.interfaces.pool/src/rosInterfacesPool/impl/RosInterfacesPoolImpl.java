@@ -68,6 +68,7 @@ public class RosInterfacesPoolImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RosInterface> getInterfaces() {
 		if (interfaces == null) {
 			interfaces = new EObjectContainmentEList<RosInterface>(RosInterface.class, this, RosInterfacesPoolPackage.ROS_INTERFACES_POOL__INTERFACES);
