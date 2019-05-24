@@ -42,7 +42,7 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.ecore.component.componentDefinition.AbstractComponentElement;
-import org.ecore.component.componentDefinition.ComponentDefinition;
+import org.ecore.component.componentDefinition.ComponentDefModel;
 import org.ecore.component.seronetExtension.MixedPortROS;
 
 import com.google.inject.Guice;
@@ -62,11 +62,13 @@ public class ROSGenerator extends AbstractGenerator {
 		
 		boolean hasRosPorts = false;
 		for(EObject obj: resource.getContents()) {
-			if(obj instanceof ComponentDefinition) {
-				ComponentDefinition comp = (ComponentDefinition)obj;
-				for(AbstractComponentElement elem: comp.getElements()) {
-					if(elem instanceof MixedPortROS) {
-						hasRosPorts = true;
+			if(obj instanceof ComponentDefModel) {
+				ComponentDefModel model = (ComponentDefModel)obj;
+				if(model.getComponent() != null) {
+					for(AbstractComponentElement elem: model.getComponent().getElements()) {
+						if(elem instanceof MixedPortROS) {
+							hasRosPorts = true;
+						}
 					}
 				}
 			}
@@ -83,6 +85,8 @@ public class ROSGenerator extends AbstractGenerator {
 			
 			// refresh the source-folder (and its subfolders down to depth 3) for making changes visible
 			genHelper.refreshFolder(ExtendedOutputConfigurationProvider.ROS_OUTPUT, 2);
+		} else {
+			genHelper.deleteFolder(ExtendedOutputConfigurationProvider.ROS_OUTPUT);
 		}
 	}
 }
