@@ -1,0 +1,34 @@
+PackageSet{package{
+    Package geometry_msgs{ spec { 
+      TopicSpec Accel{ message { Vector3 linear Vector3 angular }},
+      TopicSpec AccelStamped{ message { Header header Accel accel }},
+      TopicSpec AccelWithCovariance{ message { Accel accel float64[] covariance }},
+      TopicSpec AccelWithCovarianceStamped{ message { Header header AccelWithCovariance accel }},
+      TopicSpec Inertia{ message { float64 m "geometry_msgs.Vector3" com float64 ixx float64 ixy float64 ixz float64 iyy float64 iyz float64 izz }},
+      TopicSpec InertiaStamped{ message { Header header Inertia inertia }},
+      TopicSpec Point{ message { float64 x float64 y float64 z }},
+      TopicSpec Point32{ message { float32 x float32 y float32 z }},
+      TopicSpec PointStamped{ message { Header header Point point }},
+      TopicSpec Polygon{ message { Point32[] points }},
+      TopicSpec PolygonStamped{ message { Header header Polygon polygon }},
+      TopicSpec Pose{ message { Point position Quaternion orientation }},
+      TopicSpec Pose2D{ message { float64 x float64 y float64 theta }},
+      TopicSpec PoseArray{ message { Header header Pose[] poses }},
+      TopicSpec PoseStamped{ message { Header header Pose pose }},
+      TopicSpec PoseWithCovariance{ message { Pose pose float64[] covariance }},
+      TopicSpec PoseWithCovarianceStamped{ message { Header header PoseWithCovariance pose }},
+      TopicSpec Quaternion{ message { float64 x float64 y float64 z float64 w }},
+      TopicSpec QuaternionStamped{ message { Header header Quaternion quaternion }},
+      TopicSpec Transform{ message { Vector3 translation Quaternion rotation }},
+      TopicSpec TransformStamped{ message { Header header string child_frame_id Transform transform }},
+      TopicSpec Twist{ message { Vector3 linear Vector3 angular }},
+      TopicSpec TwistStamped{ message { Header header Twist twist }},
+      TopicSpec TwistWithCovariance{ message { Twist twist float64[] covariance }},
+      TopicSpec TwistWithCovarianceStamped{ message { Header header TwistWithCovariance twist }},
+      TopicSpec Vector3{ message { float64 x float64 y float64 z }},
+      TopicSpec Vector3Stamped{ message { Header header Vector3 vector }},
+      TopicSpec Wrench{ message { Vector3 force Vector3 torque }},
+      TopicSpec WrenchStamped{ message { Header header Wrench wrench }}
+    }}
+  }
+}

@@ -47,4 +47,48 @@
       </menuContribution>
    </extension>
 
+	<extension
+        point="org.eclipse.ui.handlers">
+        <handler
+              class="de.seronet_projekt.ros.componentGateway.ComponentGatewayExecutableExtensionFactory:de.seronet_projekt.ros.componentGateway.GenerationObjectHandler"
+              commandId="de.seronet_projekt.ros.componentGateway.generator.commandCommunicationObject">
+     	</handler>
+    </extension>
+ 
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="de.seronet_projekt.ros.componentGateway.generator.commandCommunicationObject"
+            name="Generate SeRoNet Communication Objects">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+             allPopups="false"
+             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+      <command
+               commandId="de.seronet_projekt.ros.componentGateway.generator.commandCommunicationObject"
+               >
+             <visibleWhen
+                   checkEnabled="false">
+                <and>
+                   <with
+                         variable="selection">
+                      <count
+                            value="1">
+                      </count>
+                   </with>
+                   <iterate
+                         ifEmpty="false">
+                           <test
+                                 property="org.eclipse.core.resources.extension"
+                                 value="ros">
+                           </test>
+                   </iterate>
+                </and>
+             </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
 </plugin>
