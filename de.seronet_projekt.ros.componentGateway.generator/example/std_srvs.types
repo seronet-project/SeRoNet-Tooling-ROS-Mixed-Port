@@ -1,0 +1,22 @@
+CommObjectsRepository std_srvs version 1.0.0 {
+	CommObject EmptyRequest {
+	}
+	CommObject EmptyResponse {
+	}
+	
+	CommObject SetBoolRequest {
+		data : Boolean
+	}
+	CommObject SetBoolResponse {
+		success : Boolean
+		message : String
+	}
+	
+	CommObject TriggerRequest {
+	}
+	CommObject TriggerResponse {
+		success : Boolean
+		message : String
+	}
+	
+}

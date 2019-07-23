@@ -32,10 +32,12 @@ import primitives.impl.uint64ArrayImpl
 import primitives.impl.uint64Impl
 import primitives.impl.uint8ArrayImpl
 import primitives.impl.uint8Impl
+import ros.Package
 import ros.PackageSet
 import ros.impl.ActionSpecImpl
 import ros.impl.ServiceSpecImpl
 import ros.impl.TopicSpecImpl
+import java.util.Arrays
 
 /**
  * Generates code from your model files on save.
@@ -46,45 +48,66 @@ class CommunicationObjectsTransformationGenerator extends AbstractGenerator {
  	String resourcepath
  	String repositoryName
  	//String pkg_name
-	//String pkg_crossref
+	String pkg_crossref
 	String name_crossref
 	String data_name
 	Class<? extends EObject> rostypeClass
 
 
+
  	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
  		//if (resource.allContents.toString.contains("spec")){ 			
- 			for (package : resource.allContents.toIterable.filter(PackageSet)){
+ 			for (packages : resource.allContents.toIterable.filter(PackageSet)){
  				resourcepath = resource.URI.toString()
- 				repositoryName = resourcepath.substring(resourcepath.lastIndexOf("/"),resourcepath.lastIndexOf(".ros"))
-				fsa.generateFile(repositoryName+".types",CustomOutputProvider::DEFAULT_OUTPUT,package.compile_communication_objects)
+ 				repositoryName = resourcepath.substring(resourcepath.lastIndexOf("/")+1,resourcepath.lastIndexOf(".ros"))
+ 				for (package : packages.package){
+					fsa.generateFile(package.name+".types",CustomOutputProvider::DEFAULT_OUTPUT,package.compile_communication_objects_to_type)
+				}
+				fsa.generateFile(repositoryName+".services",CustomOutputProvider::DEFAULT_OUTPUT,compile_communication_objects_to_services(packages,repositoryName))
+				
 			}
  		}//}
 
 		
-	def compile_communication_objects (PackageSet rosPackages)
+	def compile_communication_objects_to_type (Package rosPackage)
 	'''
-«FOR rosPackage:rosPackages.package»
 CommObjectsRepository «rosPackage.name» version 1.0.0 {
 	«FOR Spec:rosPackage.spec»
-		«IF Spec.class==TopicSpecImpl»
-		CommObject «Spec.name» {
-			«FOR message:Spec.eContents()»
-				«FOR msg_part:message.eContents»
-					«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0)).length > 0)»
-					«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0))»
-					«ENDIF»
-				«ENDFOR»
-			«ENDFOR»
-		}
-		«ENDIF»
-		«IF Spec.class==ServiceSpecImpl»
-		«ENDIF»
-		«IF Spec.class==ActionSpecImpl»
-		«ENDIF»
-«ENDFOR»
+	«IF !Arrays.asList("UInt8","UInt16","UInt64","Int8","Int16","UInt32","Int32","Int64","Float","Double","String","Boolean").contains(Spec.name)»
+	«IF Spec.class==TopicSpecImpl && Spec.eContents.length >0»
+	CommObject «Spec.name» {
+		«FOR message:Spec.eContents()»
+		«FOR msg_part:message.eContents»
+		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name).length > 0)»
+		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name)»
+	«ENDIF»
+	«ENDFOR»
+	«ENDFOR»
+	}
+	
+	«ENDIF»
+	«IF Spec.class==ServiceSpecImpl && Spec.eContents.length >0»
+	CommObject «Spec.name»Request {
+		«FOR msg_part:Spec.eContents.get(0).eContents»
+		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name).length > 0 )»
+		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name)»
+	«ENDIF»
+	«ENDFOR»
+	}
+	CommObject «Spec.name»Response {
+		«FOR msg_part:Spec.eContents.get(1).eContents»
+		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name).length > 0 )»
+		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name)»
+	«ENDIF»
+	«ENDFOR»
+	}
+	
+	«ENDIF»
+	«IF Spec.class==ActionSpecImpl»
+	«ENDIF»
+	«ENDIF»
+	«ENDFOR»
 }
-«ENDFOR»
 '''
 	def String getData(String msg_part){
 		//TODO: implement this case as Enumeration for SeRoNet
@@ -95,7 +118,7 @@ CommObjectsRepository «rosPackage.name» version 1.0.0 {
 			return ""
 		}
 	}
-	def String mapROStoSR2 (EObject rostype){
+	def String mapROStoSR2 (EObject rostype, String pkg_name){
 		rostypeClass = rostype.class
 		if (rostypeClass == uint8Impl){
 			return "UInt8"
@@ -169,21 +192,54 @@ CommObjectsRepository «rosPackage.name» version 1.0.0 {
 		if (rostypeClass == boolArrayImpl){
 			return "Boolean[*]"
 		}
-		if (rostypeClass == TopicSpecRefImpl){
-			//pkg_crossref = rostype.eCrossReferences.get(0).eContainer.toString()
+		if (rostypeClass == TopicSpecRefImpl ){
+			pkg_crossref = rostype.eCrossReferences.get(0).eContainer.toString()
 			name_crossref = rostype.eCrossReferences.toString()
-			//if ( pkg_name == pkg_crossref ){
-			return name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))
-			//} else{
-			//	return pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")]"))+"/"+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))
-			//}
+			if (pkg_name == pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")"))){
+				return name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))
+			} else{
+				return pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")"))+"."+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))
+			}
 		}
 		if (rostypeClass == ArrayTopicSpecRefImpl){
+			pkg_crossref = rostype.eCrossReferences.get(0).eContainer.toString()
 			name_crossref = rostype.eCrossReferences.toString()
-			return name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))+"[*]"
+			if (pkg_name == pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")"))){
+				return name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))+"[*]"
+			} else{
+				return pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")"))+"."+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))+"[*]"
+			} 
 		} else {
 			return ""
 		}
 
 	}
+	def compile_communication_objects_to_services(PackageSet rosPackages, String RepoName)
+		'''
+ServiceDefRepository «RepoName» version 1.0 {
+
+	«FOR rosPackage:rosPackages.package»
+	«FOR Spec:rosPackage.spec»
+	«IF !Arrays.asList("UInt8","UInt16","UInt64","Int8","Int16","UInt32","Int32","Int64","Float","Double","String","Boolean").contains(Spec.name)»
+	«IF Spec.class==TopicSpecImpl  && Spec.eContents.length >0»
+	ForkingServiceDefinition  «Spec.name»Service {
+		PushPattern <DataType=«rosPackage.name».«Spec.name»>
+	}
+
+	«ENDIF»
+	«IF Spec.class==ServiceSpecImpl  && Spec.eContents.length >0»
+	RequestAnswerServiceDefinition «Spec.name»QueryService {
+		QueryPattern <
+			RequestType = «rosPackage.name».«Spec.name»Request
+			AnswerType = «rosPackage.name».«Spec.name»Response
+		>
+	}
+
+			«ENDIF»
+			«ENDIF»
+			«ENDFOR»
+		«ENDFOR»
+
+}
+		'''
 }
