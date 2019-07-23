@@ -26,11 +26,10 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import de.seronet_projekt.ros.componentGateway.generator.ComponentGatewayGenerator;
+import de.seronet_projekt.ros.communicationObjectsTransformation.generator.CommunicationObjectsTransformationGenerator;
 import de.seronet_projekt.ros.componentGateway.generator.CustomOutputProvider;
 
-public class GenerationHandler extends AbstractHandler implements IHandler {
-	 
+public class GenerationObjectHandler extends AbstractHandler implements IHandler {	
 	  @Inject
 	  private Provider<EclipseResourceFileSystemAccess2> fileAccessProvider;
 	 
@@ -54,6 +53,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 	    ISelection selection = HandlerUtil.getCurrentSelection(event);
 	    if (selection instanceof IStructuredSelection) {
 	      IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+          
 	      Object firstElement = structuredSelection.getFirstElement();
 	      if (firstElement instanceof IFile) {
 	        IFile file = (IFile) firstElement;
@@ -67,9 +67,8 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 	        ResourceSet rs = resourceSetProvider.get(project);
 	        Resource r = rs.getResource(uri, true);
 	        
-	        ComponentGatewayGenerator generator = new ComponentGatewayGenerator();
-			generator.doGenerate(r, fsa, new GeneratorContext());
-	 
+	        CommunicationObjectsTransformationGenerator generator = new CommunicationObjectsTransformationGenerator();
+	        generator.doGenerate(r, fsa, new GeneratorContext());
 	      }
 	    }
 	    return null;

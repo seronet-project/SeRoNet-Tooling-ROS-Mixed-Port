@@ -14,4 +14,6 @@ Bundle-Activator: de.seronet_projekt.ros.componentGateway.Activator
 Require-Bundle: org.eclipse.xtext.builder,
  org.eclipse.xtext.ui,
  de.fraunhofer.ipa.componentInterface,
- de.fraunhofer.ipa.componentInterface.xtext.ui
+ de.fraunhofer.ipa.componentInterface.xtext.ui,
+ de.fraunhofer.ipa.ros.xtext.ui,
+ de.fraunhofer.ipa.ros
