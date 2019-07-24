@@ -24,6 +24,27 @@
 		<module>../ros-model/plugins/de.fraunhofer.ipa.componentInterface.xtext.ide</module>
 		<module>../ros-model/plugins/de.fraunhofer.ipa.rossystem</module>
 		<module>../de.seronet_projekt.ros.componentGateway.generator</module>
+
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.base/org.ecore.base.mixedport</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.base/org.ecore.base.mixedport.edit</module>
+		<module>../de.seronet_projekt.ros.interfaces.pool</module>
+		<module>../de.seronet_projekt.ros.interfaces.pool.edit</module>
+		<module>../de.seronet_projekt.ros.interfaces.pool.xtext</module>
+		<module>../de.seronet_projekt.ros.interfaces.pool.xtext.ui</module>
+		<module>../de.seronet_projekt.ros.interfaces.pool.xtext.ide</module>
+
+		<!--module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.service/org.ecore.service.coordinationPattern</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.service/org.ecore.service.parameterDefinition</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.service/org.ecore.service.communicationPattern</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.service/org.ecore.service.communicationObject</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.service/org.ecore.service.componentMode</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.service/org.ecore.service.serviceDefinition</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.base/org.ecore.base.basicAttributes</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.base/org.ecore.base.stateMachine</module>
+		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.component/org.ecore.component.componentDefinition</module>
+		<module>../SmartMDSD-Toolchain/org.xtend.generators/org.xtend.smartsoft.generator</module>
+		<module>../de.seronet_projekt.xtend.ROS.generator</module-->
+
 	</modules>
 
 	<repositories>
