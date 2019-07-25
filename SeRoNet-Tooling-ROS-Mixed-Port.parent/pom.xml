@@ -32,6 +32,7 @@
 		<module>../de.seronet_projekt.ros.interfaces.pool.xtext</module>
 		<module>../de.seronet_projekt.ros.interfaces.pool.xtext.ui</module>
 		<module>../de.seronet_projekt.ros.interfaces.pool.xtext.ide</module>
+		<module>../de.seronet_projekt.ros.interfaces.pool.xtext.tests</module>
 
 		<!--module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.service/org.ecore.service.coordinationPattern</module>
 		<module>../SmartMDSD-Toolchain/org.ecore.metamodels/org.ecore.service/org.ecore.service.parameterDefinition</module>
