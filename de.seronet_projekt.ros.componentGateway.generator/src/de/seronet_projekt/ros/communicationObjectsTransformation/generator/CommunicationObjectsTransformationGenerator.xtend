@@ -1,8 +1,10 @@
 package de.seronet_projekt.ros.communicationObjectsTransformation.generator
 
 import de.seronet_projekt.ros.componentGateway.generator.CustomOutputProvider
+import java.util.Arrays
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
@@ -32,12 +34,11 @@ import primitives.impl.uint64ArrayImpl
 import primitives.impl.uint64Impl
 import primitives.impl.uint8ArrayImpl
 import primitives.impl.uint8Impl
-import ros.Package
 import ros.PackageSet
 import ros.impl.ActionSpecImpl
+import ros.impl.PackageSetImpl
 import ros.impl.ServiceSpecImpl
 import ros.impl.TopicSpecImpl
-import java.util.Arrays
 
 /**
  * Generates code from your model files on save.
@@ -52,6 +53,8 @@ class CommunicationObjectsTransformationGenerator extends AbstractGenerator {
 	String name_crossref
 	String data_name
 	Class<? extends EObject> rostypeClass
+	String crossref_container
+	String crossref_repository_name
 
 
 
@@ -60,26 +63,27 @@ class CommunicationObjectsTransformationGenerator extends AbstractGenerator {
  			for (packages : resource.allContents.toIterable.filter(PackageSet)){
  				resourcepath = resource.URI.toString()
  				repositoryName = resourcepath.substring(resourcepath.lastIndexOf("/")+1,resourcepath.lastIndexOf(".ros"))
- 				for (package : packages.package){
-					fsa.generateFile(package.name+".types",CustomOutputProvider::DEFAULT_OUTPUT,package.compile_communication_objects_to_type)
-				}
-				fsa.generateFile(repositoryName+".services",CustomOutputProvider::DEFAULT_OUTPUT,compile_communication_objects_to_services(packages,repositoryName))
+ 				//for (package : packages.package){
+				fsa.generateFile("ROS"+capitalize(repositoryName)+".types",CustomOutputProvider::DEFAULT_OUTPUT,compile_communication_objects_to_type(packages, capitalize(repositoryName)))
+				//}
+				fsa.generateFile("ROS"+capitalize(repositoryName)+".services",CustomOutputProvider::DEFAULT_OUTPUT,compile_communication_objects_to_services(packages,"ROS"+capitalize(repositoryName)))
 				
 			}
  		}//}
 
 		
-	def compile_communication_objects_to_type (Package rosPackage)
+	def compile_communication_objects_to_type (PackageSet rosPackages, String repositoryName)
 	'''
-CommObjectsRepository «rosPackage.name» version 1.0.0 {
+CommObjectsRepository ROS«capitalize(repositoryName)» version 1.0.0 {
+«FOR rosPackage:rosPackages.package»
 	«FOR Spec:rosPackage.spec»
 	«IF !Arrays.asList("UInt8","UInt16","UInt64","Int8","Int16","UInt32","Int32","Int64","Float","Double","String","Boolean").contains(Spec.name)»
 	«IF Spec.class==TopicSpecImpl && Spec.eContents.length >0»
-	CommObject «Spec.name» {
+	CommObject «capitalize(rosPackage.name)»_«Spec.name» {
 		«FOR message:Spec.eContents()»
 		«FOR msg_part:message.eContents»
-		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name).length > 0)»
-		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name)»
+		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name, repositoryName).length > 0)»
+		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
 	«ENDIF»
 	«ENDFOR»
 	«ENDFOR»
@@ -87,17 +91,17 @@ CommObjectsRepository «rosPackage.name» version 1.0.0 {
 	
 	«ENDIF»
 	«IF Spec.class==ServiceSpecImpl && Spec.eContents.length >0»
-	CommObject «Spec.name»Request {
+	CommObject «capitalize(rosPackage.name)»_«Spec.name»Request {
 		«FOR msg_part:Spec.eContents.get(0).eContents»
-		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name).length > 0 )»
-		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name)»
+		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName).length > 0 )»
+		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
 	«ENDIF»
 	«ENDFOR»
 	}
-	CommObject «Spec.name»Response {
+	CommObject «capitalize(rosPackage.name)»_«Spec.name»Response {
 		«FOR msg_part:Spec.eContents.get(1).eContents»
-		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name).length > 0 )»
-		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name)»
+		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName).length > 0 )»
+		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
 	«ENDIF»
 	«ENDFOR»
 	}
@@ -107,6 +111,8 @@ CommObjectsRepository «rosPackage.name» version 1.0.0 {
 	«ENDIF»
 	«ENDIF»
 	«ENDFOR»
+	«ENDFOR»
+	
 }
 '''
 	def String getData(String msg_part){
@@ -118,7 +124,7 @@ CommObjectsRepository «rosPackage.name» version 1.0.0 {
 			return ""
 		}
 	}
-	def String mapROStoSR2 (EObject rostype, String pkg_name){
+	def String mapROStoSR2 (EObject rostype, String pkg_name, String repositoryName){
 		rostypeClass = rostype.class
 		if (rostypeClass == uint8Impl){
 			return "UInt8"
@@ -192,46 +198,53 @@ CommObjectsRepository «rosPackage.name» version 1.0.0 {
 		if (rostypeClass == boolArrayImpl){
 			return "Boolean[*]"
 		}
-		if (rostypeClass == TopicSpecRefImpl ){
+		if (rostypeClass == TopicSpecRefImpl){
 			pkg_crossref = rostype.eCrossReferences.get(0).eContainer.toString()
+			crossref_container = EcoreUtil.getURI(rostype.eCrossReferences.get(0).eContainer.eContainer as PackageSetImpl).toString
+			crossref_repository_name = "ROS"+capitalize((crossref_container.substring((crossref_container.substring(0,crossref_container.indexOf("#/"))).lastIndexOf("/")+1 ,crossref_container.lastIndexOf(".ros"))));
 			name_crossref = rostype.eCrossReferences.toString()
-			if (pkg_name == pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")"))){
-				return name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))
+			if (("ROS"+repositoryName) == crossref_repository_name){
+				return capitalize(pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")")))+"_"+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))
 			} else{
-				return pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")"))+"."+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))
+				return crossref_repository_name+"."+capitalize(pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")")))+"_"+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))
 			}
 		}
 		if (rostypeClass == ArrayTopicSpecRefImpl){
 			pkg_crossref = rostype.eCrossReferences.get(0).eContainer.toString()
+			crossref_container = EcoreUtil.getURI(rostype.eCrossReferences.get(0).eContainer.eContainer as PackageSetImpl).toString
+			crossref_repository_name = "ROS"+capitalize((crossref_container.substring((crossref_container.substring(0,crossref_container.indexOf("#/"))).lastIndexOf("/")+1 ,crossref_container.lastIndexOf(".ros"))));
 			name_crossref = rostype.eCrossReferences.toString()
-			if (pkg_name == pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")"))){
-				return name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))+"[*]"
+			if (("ROS"+repositoryName) == crossref_repository_name){
+				return capitalize(pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")")))+"_"+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))+"[*]"
 			} else{
-				return pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")"))+"."+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))+"[*]"
-			} 
+				return crossref_repository_name+"."+capitalize(pkg_crossref.substring(pkg_crossref.indexOf("name:")+6,pkg_crossref.indexOf(")")))+"_"+name_crossref.substring(name_crossref.indexOf("name:")+6,name_crossref.indexOf(")]"))+"[*]"
+			}
 		} else {
 			return ""
-		}
-
+		}}
+		
+	def String capitalize(String line) {
+	   return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 	}
+
 	def compile_communication_objects_to_services(PackageSet rosPackages, String RepoName)
 		'''
-ServiceDefRepository «RepoName» version 1.0 {
+ServiceDefRepository ROS«RepoName» version 1.0 {
 
 	«FOR rosPackage:rosPackages.package»
 	«FOR Spec:rosPackage.spec»
 	«IF !Arrays.asList("UInt8","UInt16","UInt64","Int8","Int16","UInt32","Int32","Int64","Float","Double","String","Boolean").contains(Spec.name)»
 	«IF Spec.class==TopicSpecImpl  && Spec.eContents.length >0»
 	ForkingServiceDefinition  «Spec.name»Service {
-		PushPattern <DataType=«rosPackage.name».«Spec.name»>
+		PushPattern <DataType=«RepoName».«capitalize(rosPackage.name)»_«Spec.name»>
 	}
 
 	«ENDIF»
 	«IF Spec.class==ServiceSpecImpl  && Spec.eContents.length >0»
 	RequestAnswerServiceDefinition «Spec.name»QueryService {
 		QueryPattern <
-			RequestType = «rosPackage.name».«Spec.name»Request
-			AnswerType = «rosPackage.name».«Spec.name»Response
+			RequestType = «RepoName».«capitalize(rosPackage.name)»_«Spec.name»Request
+			AnswerType = «RepoName».«capitalize(rosPackage.name)»_«Spec.name»Response
 		>
 	}
 
