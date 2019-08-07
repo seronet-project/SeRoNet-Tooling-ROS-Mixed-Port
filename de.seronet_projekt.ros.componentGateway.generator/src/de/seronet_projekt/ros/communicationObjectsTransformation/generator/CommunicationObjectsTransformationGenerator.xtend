@@ -44,6 +44,8 @@ import ros.impl.ActionSpecImpl
 import ros.impl.PackageSetImpl
 import ros.impl.ServiceSpecImpl
 import ros.impl.TopicSpecImpl
+import java.util.List
+import java.util.ArrayList
 
 /**
  * Generates code from your model files on save.
@@ -60,6 +62,9 @@ class CommunicationObjectsTransformationGenerator extends AbstractGenerator {
 	Class<? extends EObject> rostypeClass
 	String crossref_container
 	String crossref_repository_name
+	int i
+	List<String> EnumerationList
+	
 
 
 
@@ -80,53 +85,72 @@ class CommunicationObjectsTransformationGenerator extends AbstractGenerator {
 	def compile_communication_objects_to_type (PackageSet rosPackages, String repositoryName)
 	'''
 CommObjectsRepository ROS«capitalize(repositoryName)» version 1.0.0 {
+
 «FOR rosPackage:rosPackages.package»
-	«FOR Spec:rosPackage.spec»
-	«IF !Arrays.asList("UInt8","UInt16","UInt64","Int8","Int16","UInt32","Int32","Int64","Float","Double","String","Boolean").contains(Spec.name)»
-	«IF Spec.class==TopicSpecImpl && Spec.eContents.length >0»
-	CommObject «capitalize(rosPackage.name)»_«Spec.name» {
-		«FOR message:Spec.eContents()»
-		«FOR msg_part:message.eContents»
-		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name, repositoryName).length > 0)»
-		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
-	«ENDIF»
-	«ENDFOR»
-	«ENDFOR»
-	}
+«FOR Spec:rosPackage.spec»
+«IF !Arrays.asList("UInt8","UInt16","UInt64","Int8","Int16","UInt32","Int32","Int64","Float","Double","String","Boolean").contains(Spec.name)»
 	
+«IF Spec.class==TopicSpecImpl && Spec.eContents.length >0»
+CommObject «capitalize(rosPackage.name)»_«Spec.name» {
+	«FOR message:Spec.eContents()»«clear_enumeration()»
+	«FOR msg_part:message.eContents»
+	«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name, repositoryName).length > 0)»
+	«IF msg_part.toString().contains("=")»«addEnum(getData(msg_part.toString()))»
+«ELSE»
+«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
+«ENDIF»
+«ENDIF»
+«ENDFOR»
+«ENDFOR»
+}
+«ENDIF»	
+«IF Spec.class==ServiceSpecImpl && Spec.eContents.length >0»
+CommObject «capitalize(rosPackage.name)»_«Spec.name»Request {
+	«FOR msg_part:Spec.eContents.get(0).eContents»
+	«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName).length > 0 )»
+	«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
+«ENDIF»
+«ENDFOR»
+}
+
+CommObject «capitalize(rosPackage.name)»_«Spec.name»Response {
+	«FOR msg_part:Spec.eContents.get(1).eContents»
+	«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName).length > 0 )»
+	«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
+«ENDIF»
+«ENDFOR»
+}
+«ENDIF»
+«IF Spec.class==ActionSpecImpl»
+«ENDIF»
+«IF ! EnumerationList.empty»
+Enumeration «capitalize(rosPackage.name)»_«Spec.name»Type {
+	«FOR Enum:EnumerationList»
+	«Enum» = «i++»
+«ENDFOR»
+}
 	«ENDIF»
-	«IF Spec.class==ServiceSpecImpl && Spec.eContents.length >0»
-	CommObject «capitalize(rosPackage.name)»_«Spec.name»Request {
-		«FOR msg_part:Spec.eContents.get(0).eContents»
-		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName).length > 0 )»
-		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
-	«ENDIF»
-	«ENDFOR»
-	}
-	CommObject «capitalize(rosPackage.name)»_«Spec.name»Response {
-		«FOR msg_part:Spec.eContents.get(1).eContents»
-		«IF ((getData(msg_part.toString())).length > 0) && (mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName).length > 0 )»
-		«getData(msg_part.toString())» : «mapROStoSR2(msg_part.eContents().get(0), rosPackage.name,repositoryName)»
-	«ENDIF»
-	«ENDFOR»
-	}
-	
-	«ENDIF»
-	«IF Spec.class==ActionSpecImpl»
-	«ENDIF»
-	«ENDIF»
-	«ENDFOR»
-	«ENDFOR»
-	
+«ENDIF»
+«ENDFOR»
+«ENDFOR»
 }
 '''
+
+	def void clear_enumeration(){
+		EnumerationList = new ArrayList
+		i = 0
+	}
+
+	def void addEnum(String item){
+		EnumerationList.add(item)
+	}
+
 	def String getData(String msg_part){
-		//TODO: implement this case as Enumeration for SeRoNet
 		data_name = msg_part.substring(msg_part.toString().indexOf("Data:")+6,msg_part.toString().length-1)
 		if (!data_name.contains("=")){
 			return data_name
 		} else{
-			return ""
+			return data_name.substring(0,data_name.indexOf("="));
 		}
 	}
 	def String mapROStoSR2 (EObject rostype, String pkg_name, String repositoryName){

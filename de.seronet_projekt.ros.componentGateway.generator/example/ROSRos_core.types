@@ -1,4 +1,6 @@
 CommObjectsRepository ROSRos_core version 1.0.0 {
+
+
 CommObject Std_msgs_Bool {
 	data : Boolean
 }
@@ -107,12 +109,14 @@ CommObject Std_msgs_UInt8MultiArray {
 
 CommObject Std_srvs_EmptyRequest {
 }
+
 CommObject Std_srvs_EmptyResponse {
 }
 
 CommObject Std_srvs_SetBoolRequest {
 	data : Boolean
 }
+
 CommObject Std_srvs_SetBoolResponse {
 	success : Boolean
 	message : String
@@ -120,10 +124,9 @@ CommObject Std_srvs_SetBoolResponse {
 
 CommObject Std_srvs_TriggerRequest {
 }
+
 CommObject Std_srvs_TriggerResponse {
 	success : Boolean
 	message : String
 }
-
-	
 }
