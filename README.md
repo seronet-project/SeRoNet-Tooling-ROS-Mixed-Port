@@ -26,6 +26,8 @@ Technical Maintainer: [**ipa-nhg**](https://github.com/ipa-nhg/) (**Nadia Hammou
 The Eclipse plugins in this repository are part of the SeRoNet Tooling and are not supposed to be used stand-alone. A full installer for the SeRoNet Tooling is going to be released in soon.
 * A tutorial how to use the Mixed-Port-Component can be found here: [Development of a Mixed-Port-Component](https://wiki.servicerobotik-ulm.de/tutorials:ros:mixed-port-component-ros) and [System Composition using Mixed-Port Components](https://wiki.servicerobotik-ulm.de/tutorials:ros:running-a-system)
 
+* A tutorial how to use the transform ROS Messages and Services to SeRoNet Communication objects automatically can be found here: [Automatic Transformation of Communication Objects](de.seronet_projekt.ros.componentGateway.generator/README.md)
+
 *Parts of this work has been created in research and development projects funded within the scope of the “PAiCE Digitale Technologien für die Wirtschaft” technology programme run by the Federal Ministry for Economic Affairs and Energy in Germany and is managed by the DLR project management agency „Gesellschaft, Innovation, Technologie - Informationstechnologien/Elektromobilität“ at the German Aerospace Center in Cologne. The authors of this work are solely responsible for the content of this work.*
 
 <a href="#top">top</a>
