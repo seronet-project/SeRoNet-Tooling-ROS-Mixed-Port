@@ -34,6 +34,11 @@ import primitives.impl.uint64ArrayImpl
 import primitives.impl.uint64Impl
 import primitives.impl.uint8ArrayImpl
 import primitives.impl.uint8Impl
+import primitives.impl.ByteImpl
+import primitives.impl.ByteArrayImpl
+import primitives.impl.timeImpl
+import primitives.impl.durationImpl
+import primitives.impl.HeaderImpl
 import ros.PackageSet
 import ros.impl.ActionSpecImpl
 import ros.impl.PackageSetImpl
@@ -126,7 +131,7 @@ CommObjectsRepository ROS«capitalize(repositoryName)» version 1.0.0 {
 	}
 	def String mapROStoSR2 (EObject rostype, String pkg_name, String repositoryName){
 		rostypeClass = rostype.class
-		if (rostypeClass == uint8Impl){
+		if (rostypeClass == uint8Impl || rostypeClass == ByteImpl){
 			return "UInt8"
 		}
 		if (rostypeClass == uint16Impl){
@@ -162,7 +167,7 @@ CommObjectsRepository ROS«capitalize(repositoryName)» version 1.0.0 {
 		if (rostypeClass == boolImpl){
 			return "Boolean"
 		}
-		if (rostypeClass == uint8ArrayImpl){
+		if (rostypeClass == uint8ArrayImpl  || rostypeClass == ByteArrayImpl){
 			return "UInt8[*]"
 		}
 		if (rostypeClass == uint16ArrayImpl){
@@ -198,6 +203,13 @@ CommObjectsRepository ROS«capitalize(repositoryName)» version 1.0.0 {
 		if (rostypeClass == boolArrayImpl){
 			return "Boolean[*]"
 		}
+		if (rostypeClass == HeaderImpl){
+			return "ROSRos_core.Std_msgs_Header"
+		}
+		if (rostypeClass == timeImpl || rostypeClass == durationImpl){
+			return "CommBasicObjects.CommTimeStamp"
+		}
+		
 		if (rostypeClass == TopicSpecRefImpl){
 			pkg_crossref = rostype.eCrossReferences.get(0).eContainer.toString()
 			crossref_container = EcoreUtil.getURI(rostype.eCrossReferences.get(0).eContainer.eContainer as PackageSetImpl).toString
