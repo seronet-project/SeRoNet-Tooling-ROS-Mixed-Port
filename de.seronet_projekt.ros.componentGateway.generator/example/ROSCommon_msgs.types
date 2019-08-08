@@ -192,7 +192,7 @@ CommObject Diagnostic_msgs_DiagnosticArray {
 }
 
 CommObject Diagnostic_msgs_DiagnosticStatus {
-	level : UInt8
+	level : UInt8 //attribute generated from a deprecated ROS Byte type
 	name : String
 	message : String
 	hardware_id : String
@@ -224,7 +224,7 @@ CommObject Diagnostic_msgs_SelfTestRequest {
 
 CommObject Diagnostic_msgs_SelfTestResponse {
 	id : String
-	passed : UInt8
+	passed : UInt8 //attribute generated from a deprecated ROS Byte type
 	status : Diagnostic_msgs_DiagnosticStatus[*]
 }
 

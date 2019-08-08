@@ -6,7 +6,7 @@ CommObject Std_msgs_Bool {
 }
 
 CommObject Std_msgs_Byte {
-	data : UInt8
+	data : UInt8 //attribute generated from a deprecated ROS Byte type
 }
 
 CommObject Std_msgs_ByteMultiArray {

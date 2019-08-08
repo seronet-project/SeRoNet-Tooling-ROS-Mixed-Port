@@ -155,8 +155,11 @@ Enumeration «capitalize(rosPackage.name)»_«Spec.name»Type {
 	}
 	def String mapROStoSR2 (EObject rostype, String pkg_name, String repositoryName){
 		rostypeClass = rostype.class
-		if (rostypeClass == uint8Impl || rostypeClass == ByteImpl){
+		if (rostypeClass == uint8Impl){
 			return "UInt8"
+		}
+		if (rostypeClass == ByteImpl){
+			return "UInt8 //attribute generated from a deprecated ROS Byte type"
 		}
 		if (rostypeClass == uint16Impl){
 			return "UInt16"
