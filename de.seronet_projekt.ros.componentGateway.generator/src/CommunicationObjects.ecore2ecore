@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore2ecore:Ecore2EcoreMappingRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore2ecore="http://www.eclipse.org/emf/2004/Ecore2Ecore" topToBottom="true">
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//uint8"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/UInt8"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//uint16"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/UInt16"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//uint64"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/UInt64"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//int8"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/Int8"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//int16"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/Int16"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//uint32"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/UInt32"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//int32"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/Int32"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//int64"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/Int64"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//float32"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/Float"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//float64"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/Double"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//string"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/String"/>
+  </nested>
+  <nested>
+    <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#//bool"/>
+    <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#//PRIMITIVE_TYPE_NAME/Boolean"/>
+  </nested>
+  <inputs href="../../de.fraunhofer.ipa.ros/model/PrimitivesTypes.ecore#/"/>
+  <outputs href="../../org.ecore.base.basicAttributes/model/basicAttributes.ecore#/"/>
+</ecore2ecore:Ecore2EcoreMappingRoot>
