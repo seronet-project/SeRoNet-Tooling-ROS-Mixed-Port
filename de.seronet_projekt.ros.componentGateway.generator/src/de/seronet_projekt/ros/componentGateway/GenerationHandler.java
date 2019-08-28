@@ -125,10 +125,10 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 						String ComponentBody ="";
 						String SeRoNetPortConfig="";
 						if (SelectedInterface.getClass().toString().contains("componentInterface.impl.RosPublisherImpl")) {
-							MixedPortInterfaceName = ((RosPublisher)SelectedInterface).getName()+"_sub";
+							MixedPortInterfaceName = checkname(((RosPublisher)SelectedInterface).getName())+"_sub";
 							RosObjectsPath = ((RosPublisher)SelectedInterface).getPublisher().getMessage().getPackage().eContainer().eResource().getURI().toString();
 							ServiceName = ((RosPublisher)SelectedInterface).getPublisher().getMessage().getName()+"Service";
-							SeRoNetPort = "	OutputPort "+((RosPublisher) SelectedInterface).getName()+"Out";
+							SeRoNetPort = "	OutputPort "+checkname(((RosPublisher) SelectedInterface).getName())+"Out";
 							SeRoNetPortConfig = " realizedBy "+ComponentName+"Activity {}";
 							ComponentBody = "	Activity "+ComponentName+"Activity {\n"
 									+"		MixedPortROSLink "+MixedPortInterfaceName+
@@ -136,36 +136,36 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 							"	}";
 						}
 						if (SelectedInterface.getClass().toString().contains("componentInterface.impl.RosSubscriberImpl")) {
-							MixedPortInterfaceName = ((RosSubscriber)SelectedInterface).getName()+"_pub";
+							MixedPortInterfaceName = checkname(((RosSubscriber) SelectedInterface).getName())+"_pub";
 							RosObjectsPath = ((RosSubscriber)SelectedInterface).getSubscriber().getMessage().getPackage().eContainer().eResource().getURI().toString();
 							ServiceName = ((RosSubscriber)SelectedInterface).getSubscriber().getMessage().getName()+"Service";
-							SeRoNetPort = "	InputPort "+((RosSubscriber) SelectedInterface).getName()+"In";
+							SeRoNetPort = "	InputPort "+checkname(((RosSubscriber) SelectedInterface).getName())+"In";
 							SeRoNetPortConfig = " {}";
 							ComponentBody = "	Activity "+ComponentName+"Activity {\n"
 									+"		MixedPortROSLink "+MixedPortInterfaceName
-									+"\n		InputPortLink "+((RosSubscriber) SelectedInterface).getName()+"In {}"
+									+"\n		InputPortLink "+checkname(((RosSubscriber) SelectedInterface).getName())+"In {}"
 								    +"\n		DefaultTrigger PeriodicTimer 10.0 Hz\n"+
 							"	}";
 						}
 						if (SelectedInterface.getClass().toString().contains("componentInterface.impl.RosServiceClientImpl")) {
-							MixedPortInterfaceName = ((RosServiceClient)SelectedInterface).getName()+"_srvser";
+							MixedPortInterfaceName = checkname(((RosServiceClient)SelectedInterface).getName())+"_srvser";
 							RosObjectsPath = ((RosServiceClient)SelectedInterface).getSrvclient().getService().getPackage().eContainer().eResource().getURI().toString();
 							ServiceName = ((RosServiceClient)SelectedInterface).getSrvclient().getService().getName()+"QueryService";
-							SeRoNetPort = "	AnswerPort "+((RosServiceClient) SelectedInterface).getName()+"ServiceAnsw";
+							SeRoNetPort = "	AnswerPort "+checkname(((RosServiceClient) SelectedInterface).getName())+"ServiceAnsw";
 							SeRoNetPortConfig = " {}";
-							ComponentBody = "	RequestHandler "+ComponentName+"AnswHandler triggeredFrom "+((RosServiceClient) SelectedInterface).getName()+"ServiceAnsw {\n"
+							ComponentBody = "	RequestHandler "+ComponentName+"AnswHandler triggeredFrom "+checkname(((RosServiceClient) SelectedInterface).getName())+"ServiceAnsw {\n"
 									+ "	MixedPortROSLink "+MixedPortInterfaceName+"\n"+
 							"	}";
 						}
 						if (SelectedInterface.getClass().toString().contains("componentInterface.impl.RosServiceServerImpl")) {
-							MixedPortInterfaceName = ((RosServiceServer)SelectedInterface).getName()+"_srvcli";
+							MixedPortInterfaceName = checkname(((RosServiceServer)SelectedInterface).getName())+"_srvcli";
 							RosObjectsPath = ((RosServiceServer)SelectedInterface).getSrvserver().getService().getPackage().eContainer().eResource().getURI().toString();
 							ServiceName = ((RosServiceServer)SelectedInterface).getSrvserver().getService().getName()+"QueryService";
-							SeRoNetPort = "	RequestPort "+((RosServiceServer) SelectedInterface).getName()+"ServiceReq";
+							SeRoNetPort = "	RequestPort "+checkname(((RosServiceServer) SelectedInterface).getName())+"ServiceReq";
 							SeRoNetPortConfig = " {}";
 							ComponentBody = "	Activity "+ComponentName+"Activity {\n"
 									+"		MixedPortROSLink "+MixedPortInterfaceName
-									+"\n		RequestPortLink "+((RosServiceServer) SelectedInterface).getName()+"ServiceReq\n"+
+									+"\n		RequestPortLink "+checkname(((RosServiceServer)SelectedInterface).getName())+"ServiceReq\n"+
 							"	}";
 							
 						}
@@ -259,6 +259,13 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		return name;
 	}
 
+	private String checkname(String name){
+		if (name.contains("/"))
+			return name.replace("/","_");
+		else
+			return name;
+	}	
+	
 	@Override
 	  public boolean isEnabled() {
 	    return true;

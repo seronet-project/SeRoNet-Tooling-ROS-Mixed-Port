@@ -10,18 +10,17 @@ import org.eclipse.xtext.generator.OutputConfiguration
 import java.util.Set
 
 class CustomOutputProvider implements IOutputConfigurationProvider {
-	public final static String DEFAULT_OUTPUT = "DEFAULT_OUTPUT"
+	public final static String SERONET_OUTPUT = "SERONET_OUTPUT"
 	
-
 	override Set<OutputConfiguration> getOutputConfigurations() {
-		var OutputConfiguration default_config = new OutputConfiguration(DEFAULT_OUTPUT)
-		default_config.setDescription("DEFAULT_OUTPUT");
-		default_config.setOutputDirectory("./src-gen/SeRoNetComponent/");
-		default_config.setOverrideExistingResources(true);
-		default_config.setCreateOutputDirectory(true);
-		default_config.setCleanUpDerivedResources(true);
-		default_config.setSetDerivedProperty(true);
-		return newHashSet(default_config)
+		var OutputConfiguration seronet_config = new OutputConfiguration(SERONET_OUTPUT)
+		seronet_config.setDescription("SERONET_OUTPUT");
+		seronet_config.setOutputDirectory("./src-gen/SeRoNetComponent/");
+		seronet_config.setOverrideExistingResources(true);
+		seronet_config.setCreateOutputDirectory(true);
+		seronet_config.setCleanUpDerivedResources(true);
+		seronet_config.setSetDerivedProperty(true);
+		return newHashSet(seronet_config)
 	}
 }
 
@@ -34,7 +33,7 @@ class ComponentGatewayGenerator extends AbstractGenerator {
 
  	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (componentinterface : resource.allContents.toIterable.filter(ComponentInterface)){
-				fsa.generateFile(componentinterface.name+".gateway.rosinterfacespool",CustomOutputProvider::DEFAULT_OUTPUT,componentinterface.compile)
+				fsa.generateFile(componentinterface.name+".gateway.rosinterfacespool",CustomOutputProvider::SERONET_OUTPUT,componentinterface.compile)
 		}
 	}
 		
