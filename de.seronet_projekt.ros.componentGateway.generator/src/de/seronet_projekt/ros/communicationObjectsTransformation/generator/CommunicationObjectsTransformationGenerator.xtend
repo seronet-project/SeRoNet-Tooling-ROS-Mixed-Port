@@ -1,6 +1,5 @@
 package de.seronet_projekt.ros.communicationObjectsTransformation.generator
 
-import de.seronet_projekt.ros.componentGateway.generator.CustomOutputProvider
 import java.util.Arrays
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
@@ -46,7 +45,24 @@ import ros.impl.ServiceSpecImpl
 import ros.impl.TopicSpecImpl
 import java.util.List
 import java.util.ArrayList
+import org.eclipse.xtext.generator.IOutputConfigurationProvider
+import org.eclipse.xtext.generator.OutputConfiguration
+import java.util.Set
 
+class CustomOutputProvider implements IOutputConfigurationProvider {
+	public final static String DEFAULT_OUTPUT = "DEFAULT_OUTPUT"
+	
+	override Set<OutputConfiguration> getOutputConfigurations() {
+		var OutputConfiguration default_config = new OutputConfiguration(DEFAULT_OUTPUT)
+		default_config.setDescription("DEFAULT_OUTPUT");
+		default_config.setOutputDirectory("./src-gen/");
+		default_config.setOverrideExistingResources(true);
+		default_config.setCreateOutputDirectory(true);
+		default_config.setCleanUpDerivedResources(true);
+		default_config.setSetDerivedProperty(true);
+		return newHashSet(default_config)
+	}
+}
 /**
  * Generates code from your model files on save.
  * 
@@ -76,7 +92,7 @@ class CommunicationObjectsTransformationGenerator extends AbstractGenerator {
  				//for (package : packages.package){
 				fsa.generateFile("ROS"+capitalize(repositoryName)+".types",CustomOutputProvider::DEFAULT_OUTPUT,compile_communication_objects_to_type(packages, capitalize(repositoryName)))
 				//}
-				fsa.generateFile("ROS"+capitalize(repositoryName)+".services",CustomOutputProvider::DEFAULT_OUTPUT,compile_communication_objects_to_services(packages,"ROS"+capitalize(repositoryName)))
+				fsa.generateFile("ROS"+capitalize(repositoryName)+".services",CustomOutputProvider::DEFAULT_OUTPUT,compile_communication_objects_to_services(packages, "ROS"+capitalize(repositoryName)))
 				
 			}
  		}//}
@@ -268,7 +284,7 @@ Enumeration «capitalize(rosPackage.name)»_«Spec.name»Type {
 
 	def compile_communication_objects_to_services(PackageSet rosPackages, String RepoName)
 		'''
-ServiceDefRepository ROS«RepoName» version 1.0 {
+ServiceDefRepository «RepoName» version 1.0 {
 
 	«FOR rosPackage:rosPackages.package»
 	«FOR Spec:rosPackage.spec»
