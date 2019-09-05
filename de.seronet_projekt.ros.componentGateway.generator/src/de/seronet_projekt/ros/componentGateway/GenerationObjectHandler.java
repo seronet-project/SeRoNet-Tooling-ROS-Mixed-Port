@@ -27,7 +27,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 import de.seronet_projekt.ros.communicationObjectsTransformation.generator.CommunicationObjectsTransformationGenerator;
-import de.seronet_projekt.ros.componentGateway.generator.CustomOutputProvider;
+import de.seronet_projekt.ros.communicationObjectsTransformation.generator.CustomOutputProvider;
 
 public class GenerationObjectHandler extends AbstractHandler implements IHandler {	
 	  @Inject
