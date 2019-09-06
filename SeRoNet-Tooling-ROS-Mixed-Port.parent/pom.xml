@@ -17,7 +17,10 @@
 		<tycho.disableP2Mirrors>true</tycho.disableP2Mirrors>
 	</properties>
 	<modules>
-        <module>../ros-model/plugins/de.fraunhofer.ipa.ros</module>
+                <module>../ros-model/plugins/de.fraunhofer.ipa.ros</module>
+                <module>../ros-model/plugins/de.fraunhofer.ipa.ros.xtext</module>
+                <module>../ros-model/plugins/de.fraunhofer.ipa.ros.xtext.ui</module>
+                <module>../ros-model/plugins/de.fraunhofer.ipa.ros.xtext.ide</module>
 		<module>../ros-model/plugins/de.fraunhofer.ipa.componentInterface</module>
 		<module>../ros-model/plugins/de.fraunhofer.ipa.componentInterface.xtext</module>
 		<module>../ros-model/plugins/de.fraunhofer.ipa.componentInterface.xtext.ui</module>
