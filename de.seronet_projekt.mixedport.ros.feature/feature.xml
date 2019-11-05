@@ -53,6 +53,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    </license>
 
    <requires>
+      <import plugin="de.seronet_projekt.ros.interfaces.pool.xtext"/>
+      <import plugin="de.seronet_projekt.ros.interfaces.pool"/>
       <import plugin="org.eclipse.xtext.ide"/>
       <import plugin="org.eclipse.xtext.xbase.ide"/>
       <import plugin="org.antlr.runtime"/>
@@ -63,6 +65,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <import plugin="org.eclipse.xtext.util"/>
       <import plugin="org.eclipse.xtend.lib"/>
       <import plugin="org.apache.log4j"/>
+      <import plugin="de.seronet_projekt.ros.interfaces.pool.xtext.ide"/>
       <import plugin="org.eclipse.xtext.ui"/>
       <import plugin="org.eclipse.xtext.ui.shared"/>
       <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
@@ -88,9 +91,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="de.fraunhofer.ipa.componentInterface"/>
       <import plugin="de.fraunhofer.ipa.componentInterface.xtext.ui"/>
-      <import plugin="javax.inject"/>
       <import plugin="de.fraunhofer.ipa.ros.xtext.ui"/>
       <import plugin="de.fraunhofer.ipa.ros"/>
+      <import plugin="javax.inject"/>
    </requires>
 
    <plugin
