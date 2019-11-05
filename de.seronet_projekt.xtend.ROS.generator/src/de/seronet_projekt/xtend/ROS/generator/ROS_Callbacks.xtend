@@ -132,7 +132,7 @@ class ROS_Callbacks {
 	«FOR sub: comp.allROSPorts.filter[it.port instanceof RosSubscriber]»
 		void «comp.name»RosPortCallbacks::«sub.name»_cb (const «sub.packageString»::«sub.messageString»::ConstPtr &msg)
 		{
-			//FIXME: implement this upcall method, use "COMP->" to access the component's class members
+			// for implementing this method, you can use the "COMP->" macro to access the component's class members
 		}
 		
 	«ENDFOR»
@@ -140,7 +140,7 @@ class ROS_Callbacks {
 	«FOR srvClient: comp.allROSPorts.filter[it.port instanceof RosSrvServer]»
 		bool «comp.name»RosPortCallbacks::«srvClient.name»_cb («srvClient.packageString»::«srvClient.messageString»::Request &req, «srvClient.packageString»::«srvClient.messageString»::Response &res)
 		{
-			//FIXME: implement this method, use "COMP->" to access the component's class members
+			// for implementing this method, you can use the "COMP->" macro to access the component's class members
 			return true;
 		}
 		
