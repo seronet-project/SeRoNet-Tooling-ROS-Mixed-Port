@@ -12,6 +12,9 @@
       <ComponentGeneratorExtension
             class="de.seronet_projekt.xtend.ROS.generator.ext.ROSComponentGeneratorExtension">
       </ComponentGeneratorExtension>
+      <ActivityGeneratorExtension
+            class="de.seronet_projekt.xtend.ROS.generator.ext.ROSActivityGeneratorExtension">
+      </ActivityGeneratorExtension>
    </extension>
 
 </plugin>
