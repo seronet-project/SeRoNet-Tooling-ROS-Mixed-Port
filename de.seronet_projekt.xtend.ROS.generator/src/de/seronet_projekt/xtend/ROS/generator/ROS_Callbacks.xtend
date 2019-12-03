@@ -40,6 +40,8 @@ import rosInterfacesPool.RosSubscriber
 import rosInterfacesPool.RosSrvServer
 import org.ecore.component.componentDefinition.ComponentDefinition
 import org.xtend.smartsoft.generator.component.SmartComponent
+import org.ecore.component.componentDefinition.Activity
+import org.ecore.component.seronetExtension.MixedPortROSLink
 
 class ROS_Callbacks {
 	@Inject extension CopyrightHelpers;
@@ -133,6 +135,12 @@ class ROS_Callbacks {
 		void «comp.name»RosPortCallbacks::«sub.name»_cb (const «sub.packageString»::«sub.messageString»::ConstPtr &msg)
 		{
 			// for implementing this method, you can use the "COMP->" macro to access the component's class members
+			«FOR activity: comp.elements.filter(Activity)»
+				«FOR link: activity.links.filter(MixedPortROSLink).filter[it.mixedportros == sub]»
+				COMP->«activity.name.toFirstLower»->«sub.name»_cb(msg);
+				«ENDFOR»
+			«ENDFOR»
+			
 		}
 		
 	«ENDFOR»
