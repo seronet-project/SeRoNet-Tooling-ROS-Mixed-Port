@@ -100,19 +100,20 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 				ComponentInterface ComponentInterface_model = (ComponentInterface) r.getContents().get(0);
 				String ComponentName = ComponentInterface_model.getName();
 				List<EObject> RosInterfaces = getInterfaces(ComponentInterface_model);
-				List<String> RosInterfacesNames = getNameInterfaces(ComponentInterface_model);
 				ElementListSelectionDialog dialogSelect = new ElementListSelectionDialog(shell, new LabelProvider());
 				
 				String[] ListofInterfaces = new String[RosInterfaces.size()];
 				for (int i=0; i<RosInterfaces.size(); i++) {
-					ListofInterfaces[i]=(getInterfaceName(RosInterfaces.get(i)));
+					ListofInterfaces[i]=(getViewMenuInterfaceName(RosInterfaces.get(i)));
 				}
+
 				dialogSelect.setElements(ListofInterfaces);
 				dialogSelect.setTitle("Select a ROS interface to relay");
 				dialogSelect.open();
 				Object result = dialogSelect.getFirstResult();
+
 				for (EObject ResultInterface: RosInterfaces) {
-					if((getInterfaceName(ResultInterface)).equals(result)) {
+					if((getViewMenuInterfaceName(ResultInterface)).equals(result)) {
 						EObject SelectedInterface = ResultInterface;
 						String SRComponentName = "ComponentRos"+ComponentName; 
 						String RelativePathToSRComponent = "src-gen/SeRoNetComponent/"+SRComponentName+".component";
@@ -151,29 +152,29 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 							MixedPortInterfaceName = checkname(((RosServiceClient)SelectedInterface).getName())+"_srvser";
 							RosObjectsPath = ((RosServiceClient)SelectedInterface).getSrvclient().getService().getPackage().eContainer().eResource().getURI().toString();
 							ServiceName = ((RosServiceClient)SelectedInterface).getSrvclient().getService().getName()+"QueryService";
-							SeRoNetPort = "	AnswerPort "+checkname(((RosServiceClient) SelectedInterface).getName())+"ServiceAnsw";
+							SeRoNetPort = "	RequestPort "+checkname(((RosServiceClient) SelectedInterface).getName())+"ServiceReq";
 							SeRoNetPortConfig = " {}";
-							ComponentBody = "	RequestHandler "+ComponentName+"AnswHandler triggeredFrom "+checkname(((RosServiceClient) SelectedInterface).getName())+"ServiceAnsw {\n"
-									+ "	MixedPortROSLink "+MixedPortInterfaceName+"\n"+
-							"	}";
+							ComponentBody = "	Activity "+ComponentName+"Activity {\n"
+									+ "		MixedPortROSLink "+MixedPortInterfaceName+"\n"
+									+ "		RequestPortLink "+checkname(((RosServiceClient) SelectedInterface).getName())+"ServiceReq"+"\n"
+							+"	}";
 						}
 						if (SelectedInterface.getClass().toString().contains("componentInterface.impl.RosServiceServerImpl")) {
 							MixedPortInterfaceName = checkname(((RosServiceServer)SelectedInterface).getName())+"_srvcli";
 							RosObjectsPath = ((RosServiceServer)SelectedInterface).getSrvserver().getService().getPackage().eContainer().eResource().getURI().toString();
 							ServiceName = ((RosServiceServer)SelectedInterface).getSrvserver().getService().getName()+"QueryService";
-							SeRoNetPort = "	RequestPort "+checkname(((RosServiceServer) SelectedInterface).getName())+"ServiceReq";
+							SeRoNetPort = "	AnswerPort "+checkname(((RosServiceServer) SelectedInterface).getName())+"ServiceAnsw";
 							SeRoNetPortConfig = " {}";
-							ComponentBody = "	Activity "+ComponentName+"Activity {\n"
+							ComponentBody = "	RequestHandler "+ComponentName+"AnswHandler triggeredFrom "+checkname(((RosServiceServer) SelectedInterface).getName())+"ServiceAnsw {\n"
 									+"		MixedPortROSLink "+MixedPortInterfaceName
-									+"\n		RequestPortLink "+checkname(((RosServiceServer)SelectedInterface).getName())+"ServiceReq\n"+
-							"	}";
+							+"\n	}";
 							
 						}
 						
 						SRObjectsRepo = "ROS"+capitalize(RosObjectsPath.substring(RosObjectsPath.lastIndexOf("/")+1,RosObjectsPath.lastIndexOf(".ros")));
-						byte[] bytes = ("ComponentDefinition "+SRComponentName+" {\n"+ 
-						"	MixedPortROS "+MixedPortInterfaceName+"\n"+
-						SeRoNetPort +" implements "+SRObjectsRepo+"."+ServiceName+SeRoNetPortConfig+"\n"+
+						byte[] bytes = ("ComponentDefinition "+SRComponentName+" {\n\n"+ 
+						"	MixedPortROS "+MixedPortInterfaceName+"\n\n"+
+						SeRoNetPort +" implements "+SRObjectsRepo+"."+ServiceName+SeRoNetPortConfig+"\n\n"+
 						ComponentBody+"\n"+
 						"}").getBytes();
 						
@@ -206,30 +207,6 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 	private String capitalize(String line) {
 		   return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 		}
-	 
-	private List<String> getNameInterfaces(ComponentInterface componentInterface_model) {
-		  List<String> NamesInterfaces = new ArrayList<String>();
-		  for (RosPublisher RosPub: componentInterface_model.getRospublisher()) {
-			  NamesInterfaces.add(RosPub.getName());
-		  }
-		  for (RosSubscriber RosSub: componentInterface_model.getRossubscriber()) {
-			  NamesInterfaces.add(RosSub.getName());
-		  }
-		  for (RosServiceClient RosSrvc: componentInterface_model.getRosserviceclient()) {
-			  NamesInterfaces.add(RosSrvc.getName());
-		  }
-		  for (RosServiceServer RosSrvs: componentInterface_model.getRosserviceserver()) {
-			  NamesInterfaces.add(RosSrvs.getName());
-		  }
-		  for (RosActionClient RosActc: componentInterface_model.getRosactionclient()) {
-			  NamesInterfaces.add(RosActc.getName());
-		  }
-		  for (RosActionServer RosActs: componentInterface_model.getRosactionserver()) {
-			  NamesInterfaces.add(RosActs.getName());
-		  }
-		  return NamesInterfaces;
-	}
-	
 	
 	private List<EObject> getInterfaces(ComponentInterface componentInterface_model) {
 		  List<EObject> ROSInterfaces = new ArrayList<EObject>();
@@ -258,7 +235,12 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		String name = RosInterface.toString().substring(RosInterface.toString().indexOf("name:")+6,RosInterface.toString().indexOf(","));
 		return name;
 	}
-
+	private String getViewMenuInterfaceName(EObject RosInterface) {
+		String name = "["+RosInterface.toString().substring(RosInterface.toString().indexOf("impl.Ros")+8,RosInterface.toString().indexOf("Impl@"))+"]  "+
+				getInterfaceName(RosInterface);
+		return name;
+	}
+	
 	private String checkname(String name){
 		if (name.contains("/"))
 			return name.replace("/","_");
