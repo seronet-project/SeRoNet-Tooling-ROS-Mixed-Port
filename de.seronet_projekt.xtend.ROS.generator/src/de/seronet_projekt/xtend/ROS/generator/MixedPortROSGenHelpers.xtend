@@ -42,8 +42,12 @@ import rosInterfacesPool.RosService
 import rosInterfacesPool.RosAction
 import rosInterfacesPool.RosActionClient
 import rosInterfacesPool.RosActionServer
+import java.util.ArrayList
 
 class MixedPortROSGenHelpers {
+	
+	ArrayList<String> unique_dependencies = new ArrayList<String>();
+	
 	def Iterable<MixedPortROS> getAllROSPorts(ComponentDefinition comp) {
 		return comp.elements.filter(MixedPortROS).sortBy[name]
 	}
@@ -75,8 +79,13 @@ class MixedPortROSGenHelpers {
 		return typeString
 	}
 	
-	def Iterable<String> getAllPackageStrings(ComponentDefinition comp) {
-		return comp.allROSPorts.map[it.packageString];
+	def Iterable<String> getAllPackageStrings(ComponentDefinition comp) {		
+   		for (String element:comp.allROSPorts.map[it.packageString]){
+   			if(!unique_dependencies.contains(element)){
+   				unique_dependencies.add(element);
+   				}
+   		}
+		return unique_dependencies;
 	}
 	
 	def Boolean hasActionClients(ComponentDefinition comp) {
