@@ -37,9 +37,17 @@ class ROS_ComponentExtension {
 	«IF comp.hasActionServers»
 	#include <actionlib/server/simple_action_server.h>
 	«ENDIF»
-	«FOR port: comp.ROSActions»
+	«FOR port: comp.ROSPublishers»
 	#include <«port.packageString»/«port.messageString».h>
 	«ENDFOR»
+
+	«FOR port: comp.ROSActionClient»
+	#include <«port.packageString»/«port.messageString».h>
+	«ENDFOR»
+	«FOR port: comp.ROSActionServer»
+	#include <«port.packageString»/«port.messageString».h>
+	«ENDFOR»
+
 	
 	class «comp.name»RosPortBaseClass {
 	public:
@@ -49,6 +57,13 @@ class ROS_ComponentExtension {
 		«FOR port: comp.allROSPorts»
 		«port.rosType» «port.name»;
 		«ENDFOR»
+		
+		«IF comp.hasRosPublishers»
+		«FOR port:comp.ROSPublishers»
+		void «port.name»_publish_ros_msg(const «port.packageString»::«port.messageString» &msg);
+		«ENDFOR»
+		«ENDIF»
+
 	};
 	
 	#endif // ROS_PORT_BASE_CLASS_H_
@@ -86,7 +101,7 @@ class ROS_ComponentExtension {
 		virtual int onStartup() override;
 
 		«FOR port: comp.allROSPorts»
-			«IF port.isROSAction»
+			«IF port.isROSActionClient || port.isROSActionServer»
 				inline «port.rosType» get«port.name.toFirstUpper»Ptr() {
 					return «port.name»;
 				}
@@ -141,6 +156,14 @@ class ROS_ComponentExtension {
 		«ENDFOR»
 	}
 	
+	«IF component.hasRosPublishers»
+	«FOR port: component.ROSPublishers»
+	void «component.name»RosPortBaseClass::«port.name»_publish_ros_msg(const «port.packageString»::«port.messageString» &msg){
+		«port.name».publish(msg);
+	}
+	«ENDFOR»
+	«ENDIF»
+	
 	int «component.name»RosPortExtension::onStartup()
 	{
 		return startExtensionThread();
@@ -160,7 +183,10 @@ class ROS_ComponentExtension {
 	
 	void «component.name»RosPortExtension::destroy()
 	{
-		«FOR actPort: component.ROSActions»
+		«FOR actPort: component.ROSActionClient»
+		delete «actPort.name»;
+		«ENDFOR»
+		«FOR actPort: component.ROSActionServer»
 		delete «actPort.name»;
 		«ENDFOR»
 		delete nh;
