@@ -71,7 +71,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		}
 		return outputs;
 	}
-	@SuppressWarnings("null")
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getCurrentSelection(event);
