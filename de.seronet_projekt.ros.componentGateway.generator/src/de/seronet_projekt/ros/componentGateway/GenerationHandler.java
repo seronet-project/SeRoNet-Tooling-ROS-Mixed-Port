@@ -184,7 +184,7 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 									ROSMixedPorts.add("MixedPortROS "+MixedPortInterfaceName);
 									SeRoNetPorts.add("AnswerPort "+SeRoNetPort+" implements "
 									+ObjectsConversion(RosObjectsPath,ServiceName)+" {}");
-									RequestHandlers.add("	RequestHandler "+SeRoNetPort+" triggeredFrom "+checkname(((RosServiceServer) SelectedInterface).getName())+ "ServiceAnsw {\n"
+									RequestHandlers.add("	RequestHandler "+SeRoNetPort.replace("ServiceAnsw", "")+" triggeredFrom "+SeRoNetPort+" {\n"
 											+ "		MixedPortROSLink " +MixedPortInterfaceName+"\n	}");
 								}
 							}}}
