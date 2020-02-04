@@ -77,7 +77,9 @@ class ROS_ComponentExtension {
 	#define ROS_PORT_COMPONENT_EXTENSION_H_
 	
 	#include "«comp.rosPortBaseClassHeaderFile»"
+	«IF comp.hasRosSubscribers || comp.hasRosSvrServers»
 	#include "«comp.rosPortCallbacksUserClassHeaderFile»"
+	«ENDIF»
 	
 	#include "«comp.componentExtensionHeaderFilename»"
 	
@@ -88,9 +90,9 @@ class ROS_ComponentExtension {
 	{
 	private:
 		ros::NodeHandle *nh;
-		
+		«IF comp.hasRosSubscribers || comp.hasRosSvrServers»
 		«comp.name»RosPortCallbacks *callbacksPtr;
-		
+		«ENDIF»
 		virtual int extensionExecution() override;
 	public:
 		«comp.name»RosPortExtension();
@@ -133,7 +135,9 @@ class ROS_ComponentExtension {
 	:	«component.name»Extension("«component.name»RosPortExtension")
 	{
 		nh = 0;
+		«IF component.hasRosSubscribers || component.hasRosSvrServers»
 		callbacksPtr = 0;
+		«ENDIF»
 	}
 	
 	«component.name»RosPortExtension::~«component.name»RosPortExtension()
@@ -146,9 +150,9 @@ class ROS_ComponentExtension {
 	{
 		ros::init(argc, argv, "«component.name»", ros::init_options::NoSigintHandler);
 		nh = new ros::NodeHandle();
-		
+		«IF component.hasRosSubscribers || component.hasRosSvrServers»
 		callbacksPtr = new «component.name»RosPortCallbacks();
-		
+		«ENDIF»
 		component->rosPorts = this;
 		
 		«FOR port: component.allROSPorts»
@@ -190,7 +194,9 @@ class ROS_ComponentExtension {
 		delete «actPort.name»;
 		«ENDFOR»
 		delete nh;
+		«IF component.hasRosSubscribers || component.hasRosSvrServers»
 		delete callbacksPtr;
+		«ENDIF»
 	}
 	'''
 	
