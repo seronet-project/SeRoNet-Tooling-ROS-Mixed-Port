@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,8 +51,11 @@ import componentInterface.RosPublisher;
 import componentInterface.RosServiceClient;
 import componentInterface.RosServiceServer;
 import componentInterface.RosSubscriber;
+import componentInterface.RosParameter;
 import de.seronet_projekt.ros.componentGateway.generator.ComponentGatewayGenerator;
 import de.seronet_projekt.ros.componentGateway.generator.CustomOutputProvider;
+import ros.ParameterType;
+import ros.ParameterValue;
 
 public class GenerationHandler extends AbstractHandler implements IHandler {
 	
@@ -116,15 +120,20 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 					Object[] results = dialogSelect.getResult();
 					String SRComponentName = "ComponentRos"+ComponentName; 
 					String RelativePathToSRComponent = "src-gen/SeRoNetComponent/"+SRComponentName+".component";
+					String RelativePathToSRParameterComponent = "src-gen/SeRoNetComponent/"+SRComponentName+".componentParameters";
+
 					IFile SeRoNetComponentFile = project.getFile(RelativePathToSRComponent);
+					IFile SeRoNetParameterComponentFile = project.getFile(RelativePathToSRParameterComponent);
+
 					String RosObjectsPath = null;
 					String tmp_component="";
+					String tmp_parametercomponent="";
+
 					List<String> RequestHandlers = new ArrayList<>();
 					List<String> ActivityBody = new ArrayList<>();
 					List<String> SeRoNetPorts = new ArrayList<>();
 					List<String> ROSMixedPorts = new ArrayList<>();
-
-
+					
 					for (Object result_: results) {
 						for (EObject ResultInterface: RosInterfaces) {
 							String MixedPortInterfaceName = null;
@@ -230,15 +239,55 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						
+						//PARAMETERS
+						if (ComponentInterface_model.getRosparameter().size()>0) {
+							tmp_parametercomponent="ComponentParameter "+SRComponentName+"Parameters component "+SRComponentName+" {\n";
+							tmp_parametercomponent+="    InternalParameter General {\n";
+
+							for (RosParameter rosparams:ComponentInterface_model.getRosparameter()) {
+								List<String> UnsuportedTypes = Arrays.asList("ros.impl.ParameterListTypeImpl", "ros.impl.ParameterBase64TypeImpl", "ros.impl.ParameterStructTypeImpl");
+								if (!UnsuportedTypes.contains(rosparams.getParameter().getType().getClass().getTypeName())) {
+									tmp_parametercomponent+="        "+rosparams.getName().replace("/","")+" : "+getParamType(rosparams.getParameter().getType());
+									if (rosparams.getValue()!=null) {
+										if (rosparams.getParameter().getType().getClass().getTypeName().equals("ros.impl.ParameterStringTypeImpl")) {
+										tmp_parametercomponent+=" = '"+getParamValue(rosparams.getValue())+"'";
+									}else {
+										tmp_parametercomponent+=" = "+getParamValue(rosparams.getValue());
+									}}
+									tmp_parametercomponent+="\n";
+								}}
+							tmp_parametercomponent+="    }";
+							tmp_parametercomponent+="}";
+							byte[] bytes_param = (tmp_parametercomponent).getBytes();
+							
+							InputStream source_param = new ByteArrayInputStream(bytes_param);
+							try {
+								if (!SeRoNetParameterComponentFile.exists()) {
+									SeRoNetParameterComponentFile.create(source_param, IResource.NONE, null);
+								} else{
+									@SuppressWarnings("resource")
+									OutputStream outputStream_param = new FileOutputStream(new File(project.getLocation().toString()+"/"+RelativePathToSRParameterComponent));
+									outputStream_param.write(bytes_param);
+								}
+
+							} catch (CoreException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
 					}
 				}
 		}
 
 		return null;
-	  }
+	}
 	
 	private String capitalize(String line) {
-		   return Character.toUpperCase(line.charAt(0)) + line.substring(1);
+		return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 	}
 	
 	private String SeRoNetPortsName (String RosName)  {
@@ -249,26 +298,26 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 		return "ROS"+capitalize(RosObjectsPath.substring(RosObjectsPath.lastIndexOf("/")+1,RosObjectsPath.lastIndexOf(".ros")))+"."+ServiceName;
 	}
 	private List<EObject> getInterfaces(ComponentInterface componentInterface_model) {
-		  List<EObject> ROSInterfaces = new ArrayList<EObject>();
-		  for (RosPublisher RosPub: componentInterface_model.getRospublisher()) {
-			  ROSInterfaces.add(RosPub);
-		  }
-		  for (RosSubscriber RosSub: componentInterface_model.getRossubscriber()) {
-			  ROSInterfaces.add(RosSub);
-		  }
-		  for (RosServiceClient RosSrvc: componentInterface_model.getRosserviceclient()) {
-			  ROSInterfaces.add(RosSrvc);
-		  }
-		  for (RosServiceServer RosSrvs: componentInterface_model.getRosserviceserver()) {
-			  ROSInterfaces.add(RosSrvs);
-		  }
-		  for (RosActionClient RosActc: componentInterface_model.getRosactionclient()) {
-			  ROSInterfaces.add(RosActc);
-		  }
-		  for (RosActionServer RosActs: componentInterface_model.getRosactionserver()) {
-			  ROSInterfaces.add(RosActs);
-		  }
-		  return ROSInterfaces;
+		List<EObject> ROSInterfaces = new ArrayList<EObject>();
+		for (RosPublisher RosPub: componentInterface_model.getRospublisher()) {
+			ROSInterfaces.add(RosPub);
+		}
+		for (RosSubscriber RosSub: componentInterface_model.getRossubscriber()) {
+			ROSInterfaces.add(RosSub);
+		}
+		for (RosServiceClient RosSrvc: componentInterface_model.getRosserviceclient()) {
+			ROSInterfaces.add(RosSrvc);
+		}
+		for (RosServiceServer RosSrvs: componentInterface_model.getRosserviceserver()) {
+			ROSInterfaces.add(RosSrvs);
+		}
+		for (RosActionClient RosActc: componentInterface_model.getRosactionclient()) {
+			ROSInterfaces.add(RosActc);
+		}
+		for (RosActionServer RosActs: componentInterface_model.getRosactionserver()) {
+			ROSInterfaces.add(RosActs);
+		}
+		return ROSInterfaces;
 	}
 	
 	private String getInterfaceName(EObject RosInterface) {
@@ -286,6 +335,39 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
 			return name.replace("/","_");
 		else
 			return name;
+	}
+	private String getParamType(ParameterType rostype) {
+		String rostypeClassName = rostype.getClass().getTypeName().replace("ros.impl.Parameter","").replace("TypeImpl", "");
+		//List<String> UnsuportedTypes = Arrays.asList("Array", "List", "Base64", "Struct");
+		//if (!UnsuportedTypes.contains(rostypeClassName)) {
+		if (rostypeClassName.equals("Integer")) {
+			return "Int64";
+		}
+		if (rostypeClassName.equals("Array")) {
+			return getParamType((ParameterType) rostype.eContents().get(0))+"[]";
+		} else {
+		return rostypeClassName;
+		}
+	}
+	
+	private String getParamValue(ParameterValue value) {
+		String value_string = value.toString();
+		String value_return = "";
+		if (value_string.contains("value")) {
+			return value_string.substring(value_string.indexOf("value")+7, value_string.length()-1);
+		} else if(value_string.contains("ParameterSequenceImpl")){
+			value_return+="[";
+			for(EObject param: value.eContents()){
+				if (param.toString().contains("(value:")){
+					value_return+=param.toString().substring(param.toString().indexOf("value:")+6,param.toString().indexOf(")"));
+					value_return+=",";
+			}}
+		value_return = value_return.substring(0, value_return.length() - 1);
+		value_return+="]";
+		return value_return;
+		} else {
+			return "";
+		}
 	}
 	
 	@Override
