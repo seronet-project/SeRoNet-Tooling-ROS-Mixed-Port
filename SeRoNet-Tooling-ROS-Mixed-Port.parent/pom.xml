@@ -17,18 +17,42 @@
 		<tycho.disableP2Mirrors>true</tycho.disableP2Mirrors>
 	</properties>
 	<modules>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.ros</module>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.ros.xtext</module>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.ros.xtext.ui</module>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.ros.xtext.ide</module>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.componentInterface</module>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.componentInterface.xtext</module>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.componentInterface.xtext.ui</module>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.componentInterface.xtext.ide</module>
+		<module>../ros-model/plugins/de.fraunhofer.ipa.rossystem</module>
 		<module>../de.seronet_projekt.ros.componentGateway.generator</module>
+
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/base.metamodels/org.eclipse.smartmdsd.ecore.base.mixedport</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/base.metamodels/org.eclipse.smartmdsd.ecore.base.mixedport.edit</module>
 		<module>../de.seronet_projekt.ros.interfaces.pool</module>
 		<module>../de.seronet_projekt.ros.interfaces.pool.edit</module>
 		<module>../de.seronet_projekt.ros.interfaces.pool.xtext</module>
 		<module>../de.seronet_projekt.ros.interfaces.pool.xtext.ui</module>
 		<module>../de.seronet_projekt.ros.interfaces.pool.xtext.ide</module>
 		<module>../de.seronet_projekt.ros.interfaces.pool.xtext.tests</module>
+
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/service.metamodels/org.eclipse.smartmdsd.ecore.service.coordinationPattern</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/service.metamodels/org.eclipse.smartmdsd.ecore.service.parameterDefinition</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/service.metamodels/org.eclipse.smartmdsd.ecore.service.communicationPattern</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/service.metamodels/org.eclipse.smartmdsd.ecore.service.communicationObject</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/service.metamodels/org.eclipse.smartmdsd.ecore.service.componentMode</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/service.metamodels/org.eclipse.smartmdsd.ecore.service.serviceDefinition</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/base.metamodels/org.eclipse.smartmdsd.ecore.base.basicAttributes</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/base.metamodels/org.eclipse.smartmdsd.ecore.base.stateMachine</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/ecore.metamodels/component.metamodels/org.eclipse.smartmdsd.ecore.component.componentDefinition</module>
+		<module>../SmartMDSD-Toolchain/org.eclipse.smartmdsd.parent/xtend.generators/org.eclipse.smartmdsd.xtend.smartsoft.generator</module>
 		<module>../de.seronet_projekt.xtend.ROS.generator</module>
+
 	</modules>
 
 	<repositories>
-		<repository>
+		<!--repository>
 			<id>ROS model Update Site</id>
 			<layout>p2</layout>
 			<url>http://ros-model.seronet-project.de/updatesite/latest/</url>
@@ -37,7 +61,7 @@
 			<id>SmartMDSD Update Site</id>
 			<layout>p2</layout>
 			<url>https://web2.servicerobotik-ulm.de/files/SmartMDSD_Toolchain/updatesite/latest/</url>
-		</repository>
+		</repository-->
 		<repository>
 			<id>eclipse</id>
 			<layout>p2</layout>
@@ -51,8 +75,8 @@
 		<repository>
 			<id>codehaus-snapshots</id>
 			<name>disable dead 'Codehaus Snapshots' repository, see
-                https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478
-            </name>
+				https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478
+			</name>
 			<url>http://nexus.codehaus.org/snapshots/</url>
 			<releases>
 				<enabled>false</enabled>
@@ -66,8 +90,8 @@
 		<pluginRepository>
 			<id>codehaus-snapshots</id>
 			<name>disable dead 'Codehaus Snapshots' repository, see
-                https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478
-            </name>
+				https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478
+			</name>
 			<url>http://nexus.codehaus.org/snapshots/</url>
 			<releases>
 				<enabled>false</enabled>
