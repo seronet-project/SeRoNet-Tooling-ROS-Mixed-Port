@@ -3,6 +3,7 @@
 <a id="top"/> 
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Build](https://travis-ci.org/seronet-project/SeRoNet-Tooling-ROS-Mixed-Port.svg?branch=master)](https://travis-ci.org/github/seronet-project/SeRoNet-Tooling-ROS-Mixed-Port) 
 
 This repository holds the implementation of the ROS-SeRoNet Mixed Port component within the SeRoNet Tooling, its eclipse facilities, and realted examples. 
 
